@@ -1,4 +1,3 @@
-
 form {
     height: 520px;
     width: 400px;
@@ -26,14 +25,14 @@ form h3 {
     text-align: center;
 }
 
-label {
+form label {
     display: block;
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
 }
 
-input {
+form input {
     display: block;
     height: 50px;
     width: 100%;
@@ -49,7 +48,7 @@ input {
     color: #e5e5e5;
 }
 
-button {
+form button {
     margin-top: 50px;
     width: 100%;
     background-color: #ffffff;
@@ -61,7 +60,7 @@ button {
     cursor: pointer;
 }
 
-form .social {
+.social {
     margin-top: 30px;
     display: flex;
 }
@@ -86,4 +85,10 @@ form .social {
 
 .social i {
     margin-right: 4px;
+}
+
+.test {
+    width: 50px;
+    color: white;
+    font-size: 5rem;
 }
