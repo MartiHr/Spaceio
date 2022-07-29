@@ -1,0 +1,13 @@
+.credits {
+    text-align: center;
+
+    width: 100%;
+
+    background-color: var(--clr-blue);
+
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+
+    padding: 1rem 4rem;
+    font-size: 1.5rem;
+}

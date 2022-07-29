@@ -1,9 +1,11 @@
-import { Header } from "./components/header/Header";
+import { Header } from "./components/Header/Header";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
     return (
         <div className="app">
             <Header />
+            
             <main className="main">
                 <h1>Hello, Space Cadet!</h1>
                 <p>
@@ -133,10 +135,8 @@ function App() {
                     vitae rem nulla sint recusandae optio consequatur delectus!
                 </p>
             </main>
-            {/* Footer */}
-            <footer id="foot">
-                <p className="credits">© 2022 Martin Hristov</p>
-            </footer>
+            
+            <Footer />
         </div>
     );
 }
