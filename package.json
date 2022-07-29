@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "classnames": "^2.3.1",
     "react-router-dom": "^6.3.0"
   }
 }
