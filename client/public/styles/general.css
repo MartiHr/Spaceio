@@ -3,7 +3,7 @@
     --clr-gray: #38373b;
     --clr-blue: #74b1df;
     --clr-white: #e7e5e3;
-    --gap-space: 3rem;
+    --gap-space: 5rem;
 }
 
 html {
@@ -26,8 +26,4 @@ html {
 
 .app-black {
     background-color: var(--clr-black);
-}
-
-.cover-image {
-    width: 100%;
 }
