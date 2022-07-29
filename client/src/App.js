@@ -16,7 +16,7 @@ function App() {
                 </div>
                 <div className="nav nav-right">
                     <nav className="navigation">
-                        <ul role="list" className="nav-wrapper">
+                        <ul     className="nav-wrapper">
                             <li className="nav-item">
                                 <a href="/">Home</a>
                             </li>
@@ -35,7 +35,7 @@ function App() {
                         </ul>
                     </nav>
                     <nav className="authentication">
-                        <ul role="list" className="nav-wrapper">
+                        <ul className="nav-wrapper">
                             <li className="nav-item">
                                 <a href="/login">Login</a>
                             </li>
