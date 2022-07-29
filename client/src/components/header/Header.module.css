@@ -45,10 +45,16 @@
     font-weight: bold;
     color: white;
 
-    transition: color .5s ease-in-out, box-shadow .8s ease-in-out;
+    transition: color .5s ease-in-out, box-shadow .5s ease-in-out;
 }
 
 .nav-item a:hover {
+    /* text-decoration: none; */
     color: var(--clr-white);
     box-shadow: inset 200px 10px 0 0 var(--clr-gray);
 }
+
+.active {
+    box-shadow: inset 200px 10px 0 0 var(--clr-gray);
+}
+
