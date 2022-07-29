@@ -2,7 +2,7 @@ import { Header } from "./components/header/Header";
 
 function App() {
     return (
-        <div>
+        <div className="app">
             <Header />
             <main className="main">
                 <h1>Hello, Space Cadet!</h1>

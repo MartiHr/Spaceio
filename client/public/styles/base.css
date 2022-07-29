@@ -5,14 +5,16 @@
     --clr-white: #e7e5e3;
 }
 
-body {
+html {
+    overflow-x: hidden;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.app {
+    background-color: var(--clr-white);
+
     padding: 0 4rem;
     width: 100vw;
-
-    overflow-x: hidden;
-
-    font-family: 'Orbitron', sans-serif;
-    background-color: var(--clr-white);
 
     position: relative;
 
@@ -22,60 +24,7 @@ body {
 }
 
 /* Navigation */
-#head {
-    background-color: var(--clr-blue);
-    padding: 1rem 4rem;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    border-bottom-left-radius: 3rem;
-    border-bottom-right-radius: 3rem;
-
-    font-size: 1.5rem;
-}
-
-#head .nav-left {
-    font-weight: bolder;
-    display: flex;
-}
-
-#head .nav-right {
-    width: 65%;
-
-    display: flex;
-    justify-content: space-between;
-}
-
-#head .nav-logo {
-    height: 5rem;
-}
-
-#head .nav-logo {
-    height: 5rem;
-}
-
-#head .nav-wrapper {
-    display: flex;
-    justify-content: flex-end;
-}
-
-#head .nav-item {
-    margin-left: 2rem;
-}
-
-#head .nav-item a {
-    font-weight: bold;
-    color: white;
-
-    transition: color .5s ease-in-out, box-shadow .8s ease-in-out;
-}
-
-#head .nav-item a:hover {
-    color: var(--clr-white);
-    box-shadow: inset 200px 10px 0 0 var(--clr-gray);
-}
 
 /* Footer */
 
