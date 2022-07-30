@@ -8,6 +8,7 @@ import { Footer } from "./components/Footer/Footer";
 import { Home } from './components/Home/Home';
 import { Login } from './components/FormComponents/Login/Login';
 import { Register } from './components/FormComponents/Register/Register';
+import { Create } from './components/FormComponents/Create/Create';
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname === '/login' || location.pathname === '/register') {
+        if (location.pathname === '/login'
+            || location.pathname === '/register'
+            || location.pathname === '/create') {
             setBlackBackground(true);
         } else {
             setBlackBackground(false);
@@ -44,9 +47,13 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/create' element={<Create />} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
-            {location.pathname !== '/login' && location.pathname !== '/register' && <Footer />}
+            {location.pathname !== '/login'
+                && location.pathname !== '/register'
+                && location.pathname !== '/create'
+                && <Footer />}
         </div>
     );
 }

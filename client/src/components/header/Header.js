@@ -37,6 +37,9 @@ export const Header = () => {
                             <NavLink to="/rockets" className={setNavStyle}>Rockets</NavLink>
                         </li>
                         <li className={cx('nav-item')}>
+                            <NavLink to="/create" className={setNavStyle}>Create</NavLink>
+                        </li>
+                        <li className={cx('nav-item')}>
                             <NavLink to="/about" className={setNavStyle}>About</NavLink>
                         </li>
                         <li className={cx('nav-item')}>
