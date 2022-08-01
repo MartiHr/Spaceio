@@ -1,9 +1,16 @@
 .create-form {
-    /* margin: 0; */
+    margin-bottom: 2rem;
     width: 900px;
-    height: 700px;
+    height: 850px;
 }
 
-.create-button {
-    /* margin-top: 8rem; */
+.radiance-background {
+    position: absolute;
+    right: 10rem;
+    bottom: 0;
+    height: 950px;
 }
+
+/* .create-button {
+    margin-top: 8rem;
+} */

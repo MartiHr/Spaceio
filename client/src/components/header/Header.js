@@ -31,11 +31,14 @@ export const Header = () => {
                             <NavLink to="/" className={setNavStyle}>Home</NavLink>
                         </li>
                         <li className={cx('nav-item')}>
+                            <NavLink to="/catalog" className={setNavStyle}>Catalog</NavLink>
+                        </li>
+                        {/* <li className={cx('nav-item')}>
                             <NavLink to="/ships" className={setNavStyle}>Ships</NavLink>
                         </li>
                         <li className={cx('nav-item')}>
                             <NavLink to="/rockets" className={setNavStyle}>Rockets</NavLink>
-                        </li>
+                        </li> */}
                         <li className={cx('nav-item')}>
                             <NavLink to="/create" className={setNavStyle}>Create</NavLink>
                         </li>

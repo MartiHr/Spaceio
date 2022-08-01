@@ -33,7 +33,8 @@ form label {
     font-weight: 500;
 }
 
-form input {
+form input,
+form textarea {
     display: block;
     height: 50px;
     width: 100%;
@@ -43,6 +44,15 @@ form input {
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
+}
+
+form textarea {
+    height: 100px;
+    resize: none;
+    padding-top: 0.5rem;
+}
+
+form textarea::placeholder {
 }
 
 ::placeholder {
@@ -67,6 +77,8 @@ form button {
 }
 
 .social div {
+    cursor: pointer;
+
     background: red;
     width: 150px;
     border-radius: 3px;

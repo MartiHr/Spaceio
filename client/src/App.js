@@ -9,6 +9,7 @@ import { Home } from './components/Home/Home';
 import { Login } from './components/FormComponents/Login/Login';
 import { Register } from './components/FormComponents/Register/Register';
 import { Create } from './components/FormComponents/Create/Create';
+import { Catalog } from './components/CardComponents/Catalog/Catalog';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create />} />
+                <Route path='/catalog' element={<Catalog />} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
             {location.pathname !== '/login'

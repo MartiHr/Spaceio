@@ -5,24 +5,28 @@ const cx = classnames.bind(styles);
 
 export const Create = () => {
     return (
-        <form className={cx('create-form')}>
-            <h3>Create a publication</h3>
+        <>
+            <img src={process.env.PUBLIC_URL + './static/images/space-radiance.png'} className={cx('radiance-background')} alt="" />
+            <form className={cx('create-form')}>
+                <h3>Create a publication</h3>
 
-            <label htmlFor="type">Vehicle type</label>
-            <input type="text" placeholder="Vehicle type" id="type" />
-          
-            <label htmlFor="type">Vehicle type</label>
-            <input type="text" placeholder="Vehicle type" id="type" />
+                <label htmlFor="type">Vehicle type</label>
+                <input type="text" placeholder="Vehicle type" id="type" />
 
-            <label htmlFor="type">Vehicle type</label>
-            <input type="text" placeholder="Vehicle type" id="type" />
+                <label htmlFor="model">Model</label>
+                <input type="text" placeholder="Enter the model" id="model" />
 
-            <label htmlFor="type">Vehicle type</label>
-            <input type="text" placeholder="Vehicle type" id="type" />
+                <label htmlFor="image">Image</label>
+                <input type="text" placeholder="Image url" id="image" />
 
-            
+                <label htmlFor="price">Price</label>
+                <input type="text" placeholder="Price in $" id="price" />
 
-            <button className={cx('create-button')}>Create</button>
-        </form>
+                <label htmlFor="info">Description</label>
+                <textarea placeholder="Description" id="info" rows="10" cols="50" />
+
+                <button className={cx('create-button')}>Create</button>
+            </form>
+        </>
     );
 }
