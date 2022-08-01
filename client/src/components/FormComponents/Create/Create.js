@@ -3,11 +3,11 @@ import styles from './Create.module.css';
 
 const cx = classnames.bind(styles);
 
-export const Create = () => {
+export const Create = ({createHandler}) => {
     return (
         <>
             <img src={process.env.PUBLIC_URL + './static/images/space-radiance.png'} className={cx('radiance-background')} alt="" />
-            <form className={cx('create-form')}>
+            <form className={cx('create-form')} onSubmit={createHandler}>
                 <h3>Create a publication</h3>
 
                 <label htmlFor="type">Vehicle type</label>

@@ -6,7 +6,6 @@ import { collection, getDocs } from "firebase/firestore";
 
 import db from './firebase';
 
-
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import { Home } from './components/Home/Home';
@@ -41,12 +40,12 @@ function App() {
     //     }
     // }
 
-    console.log(collection(db, 'vehicles'));
+    const [vehicles, setVehicles] = useState([]);
 
     useEffect(() => {
         getVehicles()
-            .then(x => console.log(x));
-    });
+            .then(data => setVehicles(data));
+    }, []);
 
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
@@ -59,7 +58,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create />} />
-                <Route path='/catalog' element={<Catalog />} />
+                <Route path='/catalog' element={<Catalog vehicles={vehicles} />} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
             {location.pathname !== '/login'
@@ -72,8 +71,11 @@ function App() {
 
 async function getVehicles() {
     const snapshot = await getDocs(collection(db, 'vehicles'));
-    
-    return snapshot.docs.map(doc => doc.id);
+
+    return snapshot.docs.map(doc => ({
+        _id: doc.id,
+        ...(doc.data())
+    }));
 }
 
 export default App;

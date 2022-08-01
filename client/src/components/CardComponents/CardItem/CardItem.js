@@ -1,27 +1,28 @@
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import styles from './CardItem.module.css';
 
 let cx = classNames.bind(styles);
 
-export const CardItem = () => {
+export const CardItem = ({vehicle}) => {
     return (
         <>
             <div className={cx('card-item')}>
                 <div className={cx('card-image-wrapper')}>
-                    <img src={process.env.PUBLIC_URL + './static/images/rocket.png'} className={cx('card-image')} alt="" />
-                    <p className={cx('card-title')}>Falcon</p>
+                    <img src={vehicle.imgUrl} className={cx('card-image')} alt="" />
+                    <p className={cx('card-title')}>{vehicle.model}</p>
                 </div>
 
-                <a href='/' className={cx('details-button-wrapper')}>
+                <Link to={`/catalog/${vehicle._id}`} className={cx('details-button-wrapper')}>
                     <div className={cx('button-shape')}></div>
                     <p className={cx('button-text')}>+</p>
-                </a>
+                </Link>
 
                 <div className={cx('card-info')}>
                     <div className={cx('card-info-item', 'card-info-likes')}>
                         <i className="fa-solid fa-heart"></i>
                         <p className={cx('card-info-attribute')}>Likes</p>
-                        <p className={cx('card-info-value')}>96</p>
+                        <p className={cx('card-info-value')}>{vehicle.likes}</p>
                     </div>
                     <div className={cx('card-info-item', 'card-info-comments')}>
                         <i className="fa-solid fa-comment"></i>
