@@ -2,6 +2,10 @@ import { Routes, Route } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { collection, getDocs } from "firebase/firestore";
+
+import db from './firebase';
+
 
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
@@ -10,7 +14,6 @@ import { Login } from './components/FormComponents/Login/Login';
 import { Register } from './components/FormComponents/Register/Register';
 import { Create } from './components/FormComponents/Create/Create';
 import { Catalog } from './components/CardComponents/Catalog/Catalog';
-
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -38,6 +41,13 @@ function App() {
     //     }
     // }
 
+    console.log(collection(db, 'vehicles'));
+
+    useEffect(() => {
+        getVehicles()
+            .then(x => console.log(x));
+    });
+
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
             <Header />
@@ -58,6 +68,12 @@ function App() {
                 && <Footer />}
         </div>
     );
+}
+
+async function getVehicles() {
+    const snapshot = await getDocs(collection(db, 'vehicles'));
+    
+    return snapshot.docs.map(doc => doc.id);
 }
 
 export default App;
