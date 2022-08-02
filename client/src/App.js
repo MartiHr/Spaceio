@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 import db from './firebase';
 
@@ -47,6 +47,23 @@ function App() {
             .then(data => setVehicles(data));
     }, []);
 
+
+    const createHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        let vehicleData = ({
+            ...(Object.fromEntries(formData)),
+            likes: 0
+        });
+        
+        craeteVehicle(vehicleData)
+            .then(res => console.log(res));
+
+        e.target.reset();
+    }
+
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
             <Header />
@@ -57,7 +74,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path='/create' element={<Create />} />
+                <Route path='/create' element={<Create onCreate={createHandler} />} />
                 <Route path='/catalog' element={<Catalog vehicles={vehicles} />} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
@@ -76,6 +93,12 @@ async function getVehicles() {
         _id: doc.id,
         ...(doc.data())
     }));
+}
+
+async function craeteVehicle(data) {
+    const docRef = await addDoc(collection(db, 'vehicles'), data);
+
+    return `Document written with ID: ${docRef.id}`;
 }
 
 export default App;
