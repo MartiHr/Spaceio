@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { create, getAll, getOne, remove } from './services/vehicleService';
+import { create, edit, getAll, getOne, remove } from './services/vehicleService';
 
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
@@ -23,7 +23,8 @@ function App() {
     useEffect(() => {
         if (location.pathname === '/login'
             || location.pathname === '/register'
-            || location.pathname === '/create') {
+            || location.pathname === '/create'
+            || location.pathname.includes('/edit')) {
             setBlackBackground(true);
         } else {
             setBlackBackground(false);
@@ -74,20 +75,22 @@ function App() {
             .then(vehicle => setCurrentVehicle(vehicle));
     }
 
-    const editHandler = (e) => {
-        // e.preventDefault();
+    const editHandler = (e, vehicleId) => {
+        e.preventDefault();
 
-        // const formData = new FormData(e.target);
+        const formData = new FormData(e.target);
+        
+        let vehicleData = ({
+            ...(Object.fromEntries(formData)),
+            likes: currentVehicle.likes,
+            creationDate: currentVehicle.creationDate,
+            updatedOn: Timestamp.now()
+        });
 
-        // let vehicleData = ({
-        //     ...(Object.fromEntries(formData)),
-        //     likes: 0
-        // });
+        edit(vehicleId, vehicleData)
+            .then(res => console.log(res));
 
-        // create(vehicleData)
-        //     .then(res => console.log(res));
-
-        // e.target.reset();
+        e.target.reset();
     }
 
     const deleteHandler = (id) => {
@@ -107,13 +110,14 @@ function App() {
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create onCreate={createHandler} />} />
                 <Route path='/catalog' element={<Catalog vehicles={vehicles} />} />
-                <Route path='/edit' element={<Edit onEdit={editHandler} />} />
-                <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} onEdit={editHandler} vehicle={currentVehicle} onDelete={deleteHandler} />} />
+                <Route path='/edit/:vehicleId' element={<Edit onEdit={editHandler} onDetails={detailsHandler} vehicle={currentVehicle} />} />
+                <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} vehicle={currentVehicle} onDelete={deleteHandler} />} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
             {location.pathname !== '/login'
                 && location.pathname !== '/register'
                 && location.pathname !== '/create'
+                && !(location.pathname.includes('/edit'))
                 && <Footer />}
         </div>
     );

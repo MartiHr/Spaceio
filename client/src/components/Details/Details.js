@@ -1,8 +1,9 @@
 import { useEffect } from "react"
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-export const Details = ({ vehicle, onDetails, onEdit, onDelete }) => {
+export const Details = ({ vehicle, onDetails, onDelete }) => {
     const {vehicleId} = useParams();
+    let navigate = useNavigate();
 
     useEffect(() => {
         onDetails(vehicleId);
@@ -16,7 +17,7 @@ export const Details = ({ vehicle, onDetails, onEdit, onDelete }) => {
             <h1>{vehicle.type}</h1>
             <img src={vehicle.imgUrl} alt="" />
             <p>{vehicle.description}</p>
-            <button onClick={onEdit}>EDIT</button>
+            <button onClick={() => navigate(`/edit/${vehicleId}`)}>EDIT</button>
             <button onClick={() => onDelete(vehicleId)}>DELETE</button>
         </>
     );

@@ -1,6 +1,6 @@
 import db from '../firebase';
 
-import { collection, doc, getDocs, addDoc, getDoc, deleteDoc, query, orderBy } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, addDoc, setDoc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 
 const vehiclesRef = collection(db, "vehicles");
 
@@ -13,15 +13,15 @@ export const getAll = async () => {
         ...(doc.data()),
         // a: doc.data().creationDate.toDate()
     }));
-} 
+}
 
 export const getOne = async (id) => {
     const docRef = doc(db, 'vehicles', id);
     const docSnap = await getDoc(docRef);
-    
+
     if (docSnap.exists()) {
         return docSnap.data();
-      } else {
+    } else {
         // doc.data() will be undefined in this case
         return "No such document!";
     }
@@ -34,7 +34,10 @@ export const create = async (data) => {
 }
 
 export const edit = async (id, data) => {
+    const docRef = doc(db, 'vehicles', id);
+    const docSnap = await setDoc(docRef, data);
 
+    return 'Document updated!';
 }
 
 export const remove = async (id) => {
