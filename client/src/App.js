@@ -14,6 +14,7 @@ import { Edit } from './components/FormComponents/Edit/Edit';
 import { Catalog } from './components/CardComponents/Catalog/Catalog';
 import { Create } from './components/FormComponents/Create/Create';
 import { Details } from './components/Details/Details';
+import { Timestamp } from 'firebase/firestore';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -56,7 +57,8 @@ function App() {
 
         let vehicleData = ({
             ...(Object.fromEntries(formData)),
-            likes: 0
+            likes: 0,
+            creationDate: Timestamp.now()
         });
 
         create(vehicleData)
