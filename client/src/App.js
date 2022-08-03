@@ -2,17 +2,18 @@ import { Routes, Route } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { collection, getDocs, addDoc } from "firebase/firestore";
 
-import db from './firebase';
+import { create, getAll, getOne } from './services/vehicleService';
 
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import { Home } from './components/Home/Home';
 import { Login } from './components/FormComponents/Login/Login';
 import { Register } from './components/FormComponents/Register/Register';
-import { Create } from './components/FormComponents/Create/Create';
+import { Edit } from './components/FormComponents/Edit/Edit';
 import { Catalog } from './components/CardComponents/Catalog/Catalog';
+import { Create } from './components/FormComponents/Create/Create';
+import { Details } from './components/Details/Details';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -43,7 +44,7 @@ function App() {
     const [vehicles, setVehicles] = useState([]);
 
     useEffect(() => {
-        getVehicles()
+        getAll()
             .then(data => setVehicles(data));
     }, []);
 
@@ -58,11 +59,36 @@ function App() {
             likes: 0
         });
         
-        craeteVehicle(vehicleData)
+        create(vehicleData)
             .then(res => console.log(res));
 
         e.target.reset();
     }
+
+    const [currentVehicle, setCurrentVehicle] = useState({});
+
+    const detailsHandler = (id) => {
+        getOne(id)
+            .then(vehicle => setCurrentVehicle(vehicle));
+    }
+    
+    const editHandler = (e) => {
+        // e.preventDefault();
+
+        // const formData = new FormData(e.target);
+
+        // let vehicleData = ({
+        //     ...(Object.fromEntries(formData)),
+        //     likes: 0
+        // });
+        
+        // create(vehicleData)
+        //     .then(res => console.log(res));
+
+        // e.target.reset();
+    }
+
+
 
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
@@ -76,6 +102,8 @@ function App() {
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create onCreate={createHandler} />} />
                 <Route path='/catalog' element={<Catalog vehicles={vehicles} />} />
+                <Route path='/edit' element={<Edit onEdit={editHandler}/>} />
+                <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} vehicle={currentVehicle}/>} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
             {location.pathname !== '/login'
@@ -84,21 +112,6 @@ function App() {
                 && <Footer />}
         </div>
     );
-}
-
-async function getVehicles() {
-    const snapshot = await getDocs(collection(db, 'vehicles'));
-
-    return snapshot.docs.map(doc => ({
-        _id: doc.id,
-        ...(doc.data())
-    }));
-}
-
-async function craeteVehicle(data) {
-    const docRef = await addDoc(collection(db, 'vehicles'), data);
-
-    return `Document written with ID: ${docRef.id}`;
 }
 
 export default App;

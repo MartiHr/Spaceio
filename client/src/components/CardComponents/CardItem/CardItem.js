@@ -13,7 +13,7 @@ export const CardItem = ({vehicle}) => {
                     <p className={cx('card-title')}>{vehicle.model}</p>
                 </div>
 
-                <Link to={`/catalog/${vehicle._id}`} className={cx('details-button-wrapper')}>
+                <Link to={`/details/${vehicle._id}`} className={cx('details-button-wrapper')}>
                     <div className={cx('button-shape')}></div>
                     <p className={cx('button-text')}>+</p>
                 </Link>
