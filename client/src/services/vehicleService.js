@@ -1,9 +1,12 @@
 import db from '../firebase';
 
-import { collection, doc, getDocs, addDoc, getDoc } from "firebase/firestore";
+import { collection, doc, getDocs, addDoc, getDoc, deleteDoc } from "firebase/firestore";
 
 export const getAll = async () => {
-    const snapshot = await getDocs(collection(db, 'vehicles'));
+    const snapshot = await getDocs(collection(db, 'vehicles'), );
+
+    const q = query(citiesRef, orderBy("name"), limit(3));
+
 
     return snapshot.docs.map(doc => ({
         _id: doc.id,
@@ -34,5 +37,9 @@ export const edit = async (id, data) => {
 }
 
 export const remove = async (id) => {
+    const docRef = doc(db, 'vehicles', id);
 
+    const res = await deleteDoc(docRef);
+
+    return res;
 }

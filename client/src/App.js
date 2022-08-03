@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { create, getAll, getOne } from './services/vehicleService';
+import { create, getAll, getOne, remove } from './services/vehicleService';
 
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
@@ -58,7 +58,7 @@ function App() {
             ...(Object.fromEntries(formData)),
             likes: 0
         });
-        
+
         create(vehicleData)
             .then(res => console.log(res));
 
@@ -71,7 +71,7 @@ function App() {
         getOne(id)
             .then(vehicle => setCurrentVehicle(vehicle));
     }
-    
+
     const editHandler = (e) => {
         // e.preventDefault();
 
@@ -81,14 +81,17 @@ function App() {
         //     ...(Object.fromEntries(formData)),
         //     likes: 0
         // });
-        
+
         // create(vehicleData)
         //     .then(res => console.log(res));
 
         // e.target.reset();
     }
 
-
+    const deleteHandler = (id) => {
+        remove(id)
+            .then(res => console.log(res));
+    }
 
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
@@ -102,8 +105,8 @@ function App() {
                 <Route path='/register' element={<Register />} />
                 <Route path='/create' element={<Create onCreate={createHandler} />} />
                 <Route path='/catalog' element={<Catalog vehicles={vehicles} />} />
-                <Route path='/edit' element={<Edit onEdit={editHandler}/>} />
-                <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} vehicle={currentVehicle}/>} />
+                <Route path='/edit' element={<Edit onEdit={editHandler} />} />
+                <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} onEdit={editHandler} vehicle={currentVehicle} onDelete={deleteHandler} />} />
                 {/* <Route path="/*" element={<NotFound />}/> */}
             </Routes>
             {location.pathname !== '/login'

@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom";
 
-export const Details = ({ vehicle, onDetails }) => {
+export const Details = ({ vehicle, onDetails, onEdit, onDelete }) => {
     const {vehicleId} = useParams();
 
     useEffect(() => {
@@ -16,6 +16,8 @@ export const Details = ({ vehicle, onDetails }) => {
             <h1>{vehicle.type}</h1>
             <img src={vehicle.imgUrl} alt="" />
             <p>{vehicle.description}</p>
+            <button onClick={onEdit}>EDIT</button>
+            <button onClick={() => onDelete(vehicleId)}>DELETE</button>
         </>
     );
 }
