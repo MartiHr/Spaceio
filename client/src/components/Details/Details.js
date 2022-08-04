@@ -41,9 +41,9 @@ export const Details = () => {
                     <p className={cx('description-title')}><b>Description:</b></p>
                     <p className={cx('description-content')}> {currentVehicle.description}</p>
                     <div className={cx('buttons-wrapper')}>
+                        <button onClick={() => () => { }}>LIKE</button>
                         <button onClick={() => navigate(`/edit/${vehicleId}`)}>EDIT</button>
                         <button onClick={() => onDelete(vehicleId)}>DELETE</button>
-                        <button onClick={() => () => { }}>LIKE</button>
                     </div>
                     
                 </div>
