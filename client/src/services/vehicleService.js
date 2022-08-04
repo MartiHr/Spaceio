@@ -1,6 +1,6 @@
 import db from '../firebase';
 
-import { collection, doc, getDocs, getDoc, addDoc, setDoc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, addDoc, setDoc, updateDoc, deleteDoc, query, orderBy, Timestamp } from "firebase/firestore";
 
 const vehiclesRef = collection(db, "vehicles");
 
@@ -11,7 +11,6 @@ export const getAll = async () => {
     return snapshot.docs.map(doc => ({
         _id: doc.id,
         ...(doc.data()),
-        // a: doc.data().creationDate.toDate()
     }));
 }
 
@@ -28,7 +27,7 @@ export const getOne = async (id) => {
 }
 
 export const create = async (data) => {
-    const docRef = await addDoc(vehiclesRef, data);
+    const docRef = await addDoc(vehiclesRef, {data, likes: 0, creationDate: Timestamp.now()});
 
     return `Document written with ID: ${docRef.id}`;
 }

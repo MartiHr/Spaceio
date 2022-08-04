@@ -15,6 +15,7 @@ import { Catalog } from './components/CardComponents/Catalog/Catalog';
 import { Create } from './components/FormComponents/Create/Create';
 import { Details } from './components/Details/Details';
 import { Timestamp } from 'firebase/firestore';
+import { VehicleProvider } from './contexts/VehicleContext';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -43,12 +44,12 @@ function App() {
     //     }
     // }
 
-    const [vehicles, setVehicles] = useState([]);
+    // const [vehicles, setVehicles] = useState([]);
 
-    useEffect(() => {
-        getAll()
-            .then(data => setVehicles(data));
-    }, []);
+    // useEffect(() => {
+    //     getAll()
+    //         .then(data => setVehicles(data));
+    // }, []);
 
 
     const createHandler = (e) => {
@@ -79,7 +80,7 @@ function App() {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        
+
         let vehicleData = ({
             ...(Object.fromEntries(formData)),
             likes: currentVehicle.likes,
@@ -102,18 +103,23 @@ function App() {
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
             <Header />
 
-            <Routes>
-                {/* Another possible way for black background handling */}
-                {/* <Route path='/' element={<Home blackBackgroundHandler={blackBackgroundHandler}/>} /> */}
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/create' element={<Create onCreate={createHandler} />} />
-                <Route path='/catalog' element={<Catalog vehicles={vehicles} />} />
-                <Route path='/edit/:vehicleId' element={<Edit onEdit={editHandler} onDetails={detailsHandler} vehicle={currentVehicle} />} />
-                <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} vehicle={currentVehicle} onDelete={deleteHandler} />} />
-                {/* <Route path="/*" element={<NotFound />}/> */}
-            </Routes>
+            <VehicleProvider>
+                <main>
+                    <Routes>
+                        {/* Another possible way for black background handling */}
+                        {/* <Route path='/' element={<Home blackBackgroundHandler={blackBackgroundHandler}/>} /> */}
+                        <Route path='/' element={<Home />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/create' element={<Create onCreate={createHandler} />} />
+                        <Route path='/catalog' element={<Catalog />} />
+                        <Route path='/edit/:vehicleId' element={<Edit onEdit={editHandler} onDetails={detailsHandler} vehicle={currentVehicle} />} />
+                        <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} vehicle={currentVehicle} onDelete={deleteHandler} />} />
+                        {/* <Route path="/*" element={<NotFound />}/> */}
+                    </Routes>
+                </main>
+            </VehicleProvider>
+
             {location.pathname !== '/login'
                 && location.pathname !== '/register'
                 && location.pathname !== '/create'

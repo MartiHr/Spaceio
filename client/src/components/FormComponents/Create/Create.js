@@ -1,9 +1,29 @@
-import classnames from 'classnames/bind';
 import styles from './Create.module.css';
+import classnames from 'classnames/bind';
+
+import * as vehicleService from '../../../services/vehicleService';
+
+import { useContext } from 'react';
+import { VehicleContext } from '../../../contexts/VehicleContext';
 
 const cx = classnames.bind(styles);
 
 export const Create = ({onCreate}) => {
+   
+    const { addVehicle } = useContext(VehicleContext);
+
+    const createHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        let vehicleData = Object.fromEntries(formData);
+
+        vehicleService.create()
+
+        e.target.reset();
+    }
+    
     return (
         <>
             <img src={process.env.PUBLIC_URL + './static/images/space-radiance.png'} className={cx('radiance-background')} alt="" />
