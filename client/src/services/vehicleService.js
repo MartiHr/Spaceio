@@ -1,6 +1,6 @@
 import db from '../firebase';
 
-import { collection, doc, getDocs, getDoc, addDoc, setDoc, updateDoc, deleteDoc, query, orderBy, Timestamp } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, addDoc, setDoc, deleteDoc, query, orderBy, Timestamp } from "firebase/firestore";
 
 const vehiclesRef = collection(db, "vehicles");
 

@@ -13,6 +13,7 @@ import { Catalog } from './components/CardComponents/Catalog/Catalog';
 import { Create } from './components/FormComponents/Create/Create';
 import { Details } from './components/Details/Details';
 import { VehicleProvider } from './contexts/VehicleContext';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -41,6 +42,8 @@ function App() {
     //     }
     // }
 
+    const [currentUser, setCurrentUser] = useState(null);
+
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
             <Header />
@@ -51,8 +54,9 @@ function App() {
                         {/* Another possible way for black background handling */}
                         {/* <Route path='/' element={<Home blackBackgroundHandler={blackBackgroundHandler}/>} /> */}
                         <Route path='/' element={<Home />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/register' element={<Register />} />
+                        <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+                        <Route path='/register' element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+                        <Route path='/logout' element={<Logout />} />
                         <Route path='/create' element={<Create />} />
                         <Route path='/catalog' element={<Catalog />} />
                         <Route path='/edit/:vehicleId' element={<Edit />} />

@@ -1,7 +1,7 @@
 import styles from './Catalog.module.css';
 
 import classNames from 'classnames/bind';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 
 import { CardItem } from '../CardItem/CardItem';
 import { VehicleContext } from '../../../contexts/VehicleContext';
