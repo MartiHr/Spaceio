@@ -44,61 +44,30 @@ function App() {
     //     }
     // }
 
-    // const [vehicles, setVehicles] = useState([]);
-
-    // useEffect(() => {
-    //     getAll()
-    //         .then(data => setVehicles(data));
-    // }, []);
 
 
-    const createHandler = (e) => {
-        e.preventDefault();
+    // // // const [currentVehicle, setCurrentVehicle] = useState({});
 
-        const formData = new FormData(e.target);
+    // // // const editHandler = (e, vehicleId) => {
+    // // //     e.preventDefault();
 
-        let vehicleData = ({
-            ...(Object.fromEntries(formData)),
-            likes: 0,
-            creationDate: Timestamp.now()
-        });
+    // // //     const formData = new FormData(e.target);
 
-        create(vehicleData)
-            .then(res => console.log(res));
+    // // //     let vehicleData = ({
+    // // //         ...(Object.fromEntries(formData)),
+    // // //         likes: currentVehicle.likes,
+    // // //         creationDate: currentVehicle.creationDate,
+    // // //         updatedOn: Timestamp.now()
+    // // //     });
 
-        e.target.reset();
-    }
+    // // //     edit(vehicleId, vehicleData)
+    // // //         .then(res => console.log(res));
 
-    const [currentVehicle, setCurrentVehicle] = useState({});
+    // // //     e.target.reset();
+    // // // }
 
-    const detailsHandler = (id) => {
-        getOne(id)
-            .then(vehicle => setCurrentVehicle(vehicle));
-    }
 
-    const editHandler = (e, vehicleId) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-
-        let vehicleData = ({
-            ...(Object.fromEntries(formData)),
-            likes: currentVehicle.likes,
-            creationDate: currentVehicle.creationDate,
-            updatedOn: Timestamp.now()
-        });
-
-        edit(vehicleId, vehicleData)
-            .then(res => console.log(res));
-
-        e.target.reset();
-    }
-
-    const deleteHandler = (id) => {
-        remove(id)
-            .then(res => console.log(res));
-    }
-
+    
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
             <Header />
@@ -111,10 +80,10 @@ function App() {
                         <Route path='/' element={<Home />} />
                         <Route path='/login' element={<Login />} />
                         <Route path='/register' element={<Register />} />
-                        <Route path='/create' element={<Create onCreate={createHandler} />} />
+                        <Route path='/create' element={<Create />} />
                         <Route path='/catalog' element={<Catalog />} />
-                        <Route path='/edit/:vehicleId' element={<Edit onEdit={editHandler} onDetails={detailsHandler} vehicle={currentVehicle} />} />
-                        <Route path='/details/:vehicleId' element={<Details onDetails={detailsHandler} vehicle={currentVehicle} onDelete={deleteHandler} />} />
+                        <Route path='/edit/:vehicleId' element={<Edit />} />
+                        <Route path='/details/:vehicleId' element={<Details />} />
                         {/* <Route path="/*" element={<NotFound />}/> */}
                     </Routes>
                 </main>

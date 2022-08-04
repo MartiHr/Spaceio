@@ -7,10 +7,10 @@ export const VehicleContext = createContext();
 const vehicleReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_VEHICLES':
-            return [...action.payload]
+            return action.payload.slice();
         case 'ADD_VEHICLE':
             return [...state, action.payload];
-        case 'EDIT_VEHICLE':
+        case 'UPDATE_VEHICLE':
             return state.map(x => x._id === action.vehicleId ? action.payload : x);
         case 'REMOVE_VEHICLE':
             return state.filter(x => x._id !== action.vehicleId);
@@ -37,54 +37,45 @@ export const VehicleProvider = ({
             })
     }, []);
 
-    const selectVehicle = (vehicleId) => {
-        return vehicles.find(x => x._id === vehicleId) || {};
-    };
-
+ 
     const addVehicle = (vehicleData) => {
         dispatch({
             type: 'ADD_VEHICLE',
             payload: vehicleData
         });
 
-        navigate('/');
+        navigate('/catalog');
     }
    
-    const editVehicle = (vehicleData, vehicleId) => {
+    const updateVehicle = (vehicleData, vehicleId) => {
         dispatch({
-            type: 'EDIT_VEHICLE',
+            type: 'UPDATE_VEHICLE',
             payload: vehicleData,
             vehicleId
         });
-
-        navigate(`/details/${vehicleId}`);
     }
-
 
     const removeVehicle = (vehicleId) => {
         dispatch({
             type: 'REMOVE_VEHICLE',
             vehicleId
         });
+
+        navigate('/catalog');
     }
 
-    // const getVehicleDetails = (vehicleId, vehicleDetails) => {
-    //     dispatch({
-    //         type: 'GET_VEHICLE_DETAILS',
-    //         payload: vehicleDetails,
-    //         vehicleId,
-    //     })
-    // }
+    const selectVehicle = (vehicleId) => {
+        return vehicles.find(x => x._id === vehicleId) || {};
+    };
 
     return (
         <VehicleContext.Provider value={{
             vehicles,
             addVehicle,
-            editVehicle,
+            updateVehicle,
             // addComment,
-            // getVehicleDetails,
+            removeVehicle,
             selectVehicle,
-            removeVehicle
         }}>
             {children}
         </VehicleContext.Provider>

@@ -19,7 +19,7 @@ export const getOne = async (id) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        return docSnap.data();
+        return { ...(docSnap.data()), _id: docSnap.id };
     } else {
         // doc.data() will be undefined in this case
         return "No such document!";
@@ -27,22 +27,31 @@ export const getOne = async (id) => {
 }
 
 export const create = async (data) => {
-    const docRef = await addDoc(vehiclesRef, {data, likes: 0, creationDate: Timestamp.now()});
+    const decoratedData = { ...data, likes: 0, creationDate: Timestamp.now() };
 
-    return `Document written with ID: ${docRef.id}`;
+    const docRef = await addDoc(vehiclesRef, decoratedData);
+
+    return ({ ...decoratedData, _id: docRef.id });
 }
 
-export const edit = async (id, data) => {
-    const docRef = doc(db, 'vehicles', id);
-    const docSnap = await setDoc(docRef, data);
+export const edit = async (id, newData, oldData) => {
+    const decoratedData = {
+        ...newData,
+        likes: oldData.likes,
+        creationDate: oldData.creationDate,
+        updatedOn: Timestamp.now()
+    };
 
-    return 'Document updated!';
+    const docRef = doc(db, 'vehicles', id);
+    const docSnap = await setDoc(docRef, decoratedData);
+
+    return { ...decoratedData, _id: docRef.id };
 }
 
 export const remove = async (id) => {
     const docRef = doc(db, 'vehicles', id);
 
-    const res = await deleteDoc(docRef);
+    await deleteDoc(docRef);
 
-    return res;
+    return id;
 }
