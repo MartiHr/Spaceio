@@ -3,8 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { create, edit, getAll, getOne, remove } from './services/vehicleService';
-
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import { Home } from './components/Home/Home';
@@ -14,7 +12,6 @@ import { Edit } from './components/FormComponents/Edit/Edit';
 import { Catalog } from './components/CardComponents/Catalog/Catalog';
 import { Create } from './components/FormComponents/Create/Create';
 import { Details } from './components/Details/Details';
-import { Timestamp } from 'firebase/firestore';
 import { VehicleProvider } from './contexts/VehicleContext';
 
 function App() {
@@ -44,30 +41,6 @@ function App() {
     //     }
     // }
 
-
-
-    // // // const [currentVehicle, setCurrentVehicle] = useState({});
-
-    // // // const editHandler = (e, vehicleId) => {
-    // // //     e.preventDefault();
-
-    // // //     const formData = new FormData(e.target);
-
-    // // //     let vehicleData = ({
-    // // //         ...(Object.fromEntries(formData)),
-    // // //         likes: currentVehicle.likes,
-    // // //         creationDate: currentVehicle.creationDate,
-    // // //         updatedOn: Timestamp.now()
-    // // //     });
-
-    // // //     edit(vehicleId, vehicleData)
-    // // //         .then(res => console.log(res));
-
-    // // //     e.target.reset();
-    // // // }
-
-
-    
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
             <Header />

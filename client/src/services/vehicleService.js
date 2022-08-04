@@ -42,6 +42,8 @@ export const edit = async (id, newData, oldData) => {
         updatedOn: Timestamp.now()
     };
 
+    // debugger
+
     const docRef = doc(db, 'vehicles', id);
     const docSnap = await setDoc(docRef, decoratedData);
 

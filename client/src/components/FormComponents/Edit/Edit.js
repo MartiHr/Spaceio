@@ -29,11 +29,9 @@ export const Edit = () => {
 
         vehicleService.edit(vehicleId, vehicleData, currentVehicle)
             .then(result => {
-                updateVehicle(result);
+                updateVehicle(result, vehicleId);
                 navigate(`/details/${vehicleId}`)
             });
-
-        e.target.reset();
     }
 
     return (
