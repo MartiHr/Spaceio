@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Footer.module.css';
 
 let cx = classNames.bind(styles);
-
+ 
 export const Footer = () => {
     return (
         <footer>
