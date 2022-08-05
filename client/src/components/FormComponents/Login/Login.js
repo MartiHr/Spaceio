@@ -3,16 +3,16 @@
 import classNames from 'classnames/bind';
 import loginStyles from './Login.module.css';
 import formStyles from '../../FormComponents/Form.module.css';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { signin } from '../../../firebase';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../hooks/useAuth';
 
 let cx = classNames.bind(loginStyles, formStyles);
 let cxForms = classNames.bind(formStyles);
 
-export const Login = ({ currentUser }) => {
-
+export const Login = () => {
     const navigate = useNavigate();
+    const { currentUser, userLogin } = useAuthContext();
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -21,7 +21,7 @@ export const Login = ({ currentUser }) => {
 
         if (!currentUser) {
             try {
-                await signin(email, password);
+                await userLogin(email, password);
                 navigate('/');
             } catch (error) {
                 console.log(error);

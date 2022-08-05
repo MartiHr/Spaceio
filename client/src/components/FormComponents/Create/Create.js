@@ -3,14 +3,13 @@ import classnames from 'classnames/bind';
 
 import * as vehicleService from '../../../services/vehicleService';
 
-import { useContext } from 'react';
-import { VehicleContext } from '../../../contexts/VehicleContext';
+import { useVehicleContext } from '../../../contexts/VehicleContext';
 
 const cx = classnames.bind(styles);
 
 export const Create = () => {
 
-    const { addVehicle } = useContext(VehicleContext);
+    const { addVehicle } = useVehicleContext();
 
     const onCreate = (e) => {
         e.preventDefault();

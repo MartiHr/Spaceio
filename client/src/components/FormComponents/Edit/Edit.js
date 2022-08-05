@@ -2,8 +2,8 @@ import styles from './Edit.module.css';
 import classnames from 'classnames/bind';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
-import { VehicleContext } from '../../../contexts/VehicleContext';
+import { useEffect } from 'react';
+import { useVehicleContext } from '../../../contexts/VehicleContext';
 import * as vehicleService from '../../../services/vehicleService';
 
 const cx = classnames.bind(styles);
@@ -11,7 +11,7 @@ const cx = classnames.bind(styles);
 export const Edit = () => {
     const navigate = useNavigate();
     const { vehicleId } = useParams();
-    const { selectVehicle, updateVehicle } = useContext(VehicleContext);
+    const { selectVehicle, updateVehicle } = useVehicleContext();
 
     const currentVehicle = selectVehicle(vehicleId);
 

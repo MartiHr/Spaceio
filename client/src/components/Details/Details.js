@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom";
-import { VehicleContext } from "../../contexts/VehicleContext";
+import { useVehicleContext } from "../../contexts/VehicleContext";
 import * as vehicleService from "../../services/vehicleService";
 
 import styles from './Details.module.css';
@@ -11,13 +11,13 @@ let cx = classNames.bind(styles);
 export const Details = () => {
     const navigate = useNavigate();
     const { vehicleId } = useParams();
-    const { selectVehicle, updateVehicle, removeVehicle } = useContext(VehicleContext);;
+    const { selectVehicle, updateVehicle, removeVehicle } = useVehicleContext();
 
     const currentVehicle = selectVehicle(vehicleId);
 
     useEffect(() => {
         vehicleService.getOne(vehicleId)
-            .then(result => updateVehicle(result));
+            .then(result => updateVehicle(result, vehicleId));
     }, []);
 
     const onDelete = (id) => {

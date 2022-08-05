@@ -3,24 +3,25 @@ import styles from './Register.module.css';
 import formStyles from '../../FormComponents/Form.module.css';
 
 import * as authService from '../../../services/authService';
-import { signup } from '../../../firebase';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../hooks/useAuth';
 
 let cx = classNames.bind(styles);
 let cxForms = classNames.bind(formStyles);
 
-export const Register = ({ currentUser }) => {
+export const Register = () => {
     const navigate = useNavigate();
+    const { currentUser, userRegister } = useAuthContext();
 
     const registerHandler = async (e) => {
         e.preventDefault();
 
         const { email, password } = Object.fromEntries(new FormData(e.target));
 
-        // authService.register(email, password);
         if (!currentUser) {
             try {
-                await signup(email, password);
+                await userRegister(email, password);
                 navigate('/');
             } catch (error) {
                 console.log(error);

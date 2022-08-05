@@ -21,37 +21,37 @@ const app = initializeApp(firebaseConfig);
 
 export default getFirestore();
 
-const auth = getAuth();
+export const auth = getAuth(app);
 
-export const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-}
+// export const signup = (email, password) => {
+//     return createUserWithEmailAndPassword(auth, email, password)
+// }
 
-export const signin = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-}
+// export const signin = (email, password) => {
+//     return signInWithEmailAndPassword(auth, email, password)
+// }
 
-export const signout = () => {
-    return signOut(auth);
-}
+// export const signout = () => {
+//     return signOut(auth);
+// }
 
-export const useAuth = () => {
-    const [currentUser, setCurrentUser] = useState(null);
+// export const useAuth = () => {
+//     const [currentUser, setCurrentUser] = useState(null);
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // const uid = user.uid;
+//     useEffect(() => {
+//         onAuthStateChanged(auth, (user) => {
+//             if (user) {
+//                 // const uid = user.uid;
 
-                const unsub = setCurrentUser(user);
-                return unsub;
-              } else {
-                // User is signed out
-                const unsub = setCurrentUser(null);
-                return unsub;
-              }
-        })
-    }, []);
+//                 const unsub = setCurrentUser(user);
+//                 return unsub;
+//               } else {
+//                 // User is signed out
+//                 const unsub = setCurrentUser(null);
+//                 return unsub;
+//               }
+//         })
+//     }, []);
 
-    return currentUser;
-}
+//     return currentUser;
+// }

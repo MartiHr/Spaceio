@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signout } from '../../firebase';
-import * as authService from '../../services/authService';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 export const Logout = () => {
     const navigate = useNavigate();
+    const { userLogout } = useAuthContext();
 
     useEffect(() => {
-        handleLogout();
+        handleLogout(userLogout);
         navigate('/');
     }, []);
 
     return null;
 }
 
-async function handleLogout() {
+async function handleLogout(userLogout) {
     try {
-        await signout();
+        await userLogout();
     } catch (error) {
         console.log(error);
     }

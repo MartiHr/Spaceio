@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as vehicleService from '../services/vehicleService';
 
@@ -81,3 +81,10 @@ export const VehicleProvider = ({
         </VehicleContext.Provider>
     );
 }
+
+
+export const useVehicleContext = () => {
+    const context = useContext(VehicleContext);
+
+    return context;
+};

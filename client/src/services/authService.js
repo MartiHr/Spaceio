@@ -1,45 +1,38 @@
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-// import {auth} from '../firebase';
+import { auth } from "../firebase";
 
-// export const register = (email, password) => {
+export const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password)
+}
 
-//     createUserWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//             const user = userCredential.user;
-//             console.log(user);
+export const register = (email, password) => {
+    console.log('registering');
+    debugger
+    return createUserWithEmailAndPassword(auth, email, password)
+}
+
+export const logout = () => {
+    return signOut(auth);
+}
+
+// export const useAuth = () => {
+//     const [currentUser, setCurrentUser] = useState(null);
+
+//     useEffect(() => {
+//         onAuthStateChanged(auth, (user) => {
+//             if (user) {
+//                 // const uid = user.uid;
+
+//                 const unsub = setCurrentUser(user);
+//                 return unsub;
+//               } else {
+//                 // User is signed out
+//                 const unsub = setCurrentUser(null);
+//                 return unsub;
+//               }
 //         })
-//         .catch((error) => {
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
+//     }, []);
 
-//             console.log(`Error message: ${errorMessage}, error code: ${errorCode}`);
-//         });
-
-// }
-
-// export const login = (email, password) => {
-    
-//     signInWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//             const user = userCredential.user;
-
-//             console.log(user);
-//         })
-//         .catch((error) => {
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-
-//             console.log(`Error message: ${errorMessage}, error code: ${errorCode}`);
-//         });
-// }
-
-
-// export const logout = (email, password) => {
-
-//     signOut(auth).then(() => {
-//         console.log('Sign-out successful!');
-//     }).catch((error) => {
-//         console.log(error);
-//     });
+//     return currentUser;
 // }
