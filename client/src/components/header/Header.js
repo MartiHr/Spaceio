@@ -5,9 +5,9 @@ import styles from './Header.module.css';
 
 let cx = classNames.bind(styles);
 
-export const Header = () => {
-    const setNavStyle = ({isActive}) => {
-        return isActive 
+export const Header = ({ currentUser }) => {
+    const setNavStyle = ({ isActive }) => {
+        return isActive
             ? cx('active')
             : undefined
     };
@@ -51,16 +51,27 @@ export const Header = () => {
                     </ul>
                 </nav>
                 <nav className={cx('authentication')}>
+                    {/* {currentUser ? <h1>Logged in</h1> : <h1>Not logged</h1>} */}
                     <ul className={cx('nav-wrapper')}>
-                        <li className={cx('nav-item')}>
-                            <NavLink to="/login" className={setNavStyle}>Login</NavLink>
-                        </li>
-                        <li className={cx('nav-item')}>
-                            <NavLink to="/register" className={setNavStyle}>Register</NavLink>
-                        </li>
-                        <li className={cx('nav-item')}>
-                            <NavLink to="/logout" className={setNavStyle}>Logout</NavLink>
-                        </li>
+                        {!currentUser
+                            ? <>
+                                <li className={cx('nav-item')}>
+                                    <NavLink to="/login" className={setNavStyle}>Login</NavLink>
+                                </li>
+                                <li className={cx('nav-item')}>
+                                    <NavLink to="/register" className={setNavStyle}>Register</NavLink>
+                                </li>
+                            </>
+                            : <>
+                                <p>{currentUser.email}</p>
+                                <li className={cx('nav-item')}>
+                                    <NavLink to="/logout" className={setNavStyle}>Logout</NavLink>
+                                </li>
+                            </>
+
+                        }
+
+
                     </ul>
                 </nav>
             </div>

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -14,6 +14,8 @@ import { Create } from './components/FormComponents/Create/Create';
 import { Details } from './components/Details/Details';
 import { VehicleProvider } from './contexts/VehicleContext';
 import { Logout } from './components/Logout/Logout';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useAuth } from './firebase';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -42,11 +44,28 @@ function App() {
     //     }
     // }
 
-    const [currentUser, setCurrentUser] = useState(null);
+    // const navigate = useNavigate();
+
+    // const auth = getAuth();
+
+    // onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //         // User is signed in, see docs for a list of available properties
+    //         // https://firebase.google.com/docs/reference/js/firebase.User
+    //         const uid = user.uid;
+    //         navigate('/home')
+    //         // ...
+    //     } else {
+    //         // User is signed out
+    //         // ...
+    //     }
+    // });
+
+    const currentUser = useAuth();
 
     return (
         <div className={`app ${blackBackground ? 'app-black' : ''}`}>
-            <Header />
+            <Header currentUser={currentUser}/>
 
             <VehicleProvider>
                 <main>
@@ -54,8 +73,8 @@ function App() {
                         {/* Another possible way for black background handling */}
                         {/* <Route path='/' element={<Home blackBackgroundHandler={blackBackgroundHandler}/>} /> */}
                         <Route path='/' element={<Home />} />
-                        <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
-                        <Route path='/register' element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+                        <Route path='/login' element={<Login currentUser={currentUser} />} />
+                        <Route path='/register' element={<Register currentUser={currentUser} />} />
                         <Route path='/logout' element={<Logout />} />
                         <Route path='/create' element={<Create />} />
                         <Route path='/catalog' element={<Catalog />} />

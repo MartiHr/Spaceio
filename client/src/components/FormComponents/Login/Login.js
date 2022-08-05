@@ -1,36 +1,47 @@
-import * as authService from '../../../services/authService';
+// import * as authService from '../../../services/authService';
 
 import classNames from 'classnames/bind';
 import loginStyles from './Login.module.css';
 import formStyles from '../../FormComponents/Form.module.css';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../firebase';
+import { useNavigate } from 'react-router-dom';
+import { signin } from '../../../firebase';
 
 let cx = classNames.bind(loginStyles, formStyles);
 let cxForms = classNames.bind(formStyles);
 
-export const Login = ({ currentUser, setCurrentUser }) => {
+export const Login = ({ currentUser }) => {
 
-    const loginHandler = (e) => {
+    const navigate = useNavigate();
+
+    const loginHandler = async (e) => {
         e.preventDefault();
 
         const { email, password } = Object.fromEntries(new FormData(e.target));
 
-        // let a = authService.login(email, password)
+        if (!currentUser) {
+            try {
+                await signin(email, password);
+                navigate('/');
+            } catch (error) {
+                console.log(error);
+            }
+        }
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
+        // signInWithEmailAndPassword(auth, email, password)
+        //     .then((userCredential) => {
+        //         const user = userCredential.user;
+        //         console.log(user);
 
-                setCurrentUser(user);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+        //         setCurrentUser(user);
+        //         navigate('/home');
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
 
-                console.log(`Error message: ${errorMessage}, error code: ${errorCode}`);
-            });
+        //         console.log(`Error message: ${errorMessage}, error code: ${errorCode}`);
+        //     });
     }
 
     return (
