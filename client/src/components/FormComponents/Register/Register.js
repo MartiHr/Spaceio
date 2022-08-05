@@ -3,16 +3,16 @@ import styles from './Register.module.css';
 import formStyles from '../../FormComponents/Form.module.css';
 
 import * as authService from '../../../services/authService';
+
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
-import { useAuth } from '../../../hooks/useAuth';
 
 let cx = classNames.bind(styles);
 let cxForms = classNames.bind(formStyles);
 
 export const Register = () => {
     const navigate = useNavigate();
-    const { currentUser, userRegister } = useAuthContext();
+    const { currentUser } = useAuthContext();
 
     const registerHandler = async (e) => {
         e.preventDefault();
@@ -21,10 +21,10 @@ export const Register = () => {
 
         if (!currentUser) {
             try {
-                await userRegister(email, password);
+                await authService.register(email, password);
                 navigate('/');
             } catch (error) {
-                console.log(error);
+                alert(error.message.split('Firebase: ').pop());
             }
         }
     }

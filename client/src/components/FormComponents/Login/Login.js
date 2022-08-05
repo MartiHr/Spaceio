@@ -1,18 +1,59 @@
-// import * as authService from '../../../services/authService';
-
 import classNames from 'classnames/bind';
 import loginStyles from './Login.module.css';
 import formStyles from '../../FormComponents/Form.module.css';
+
+import * as authService from '../../../services/authService';
+
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
-import { useAuth } from '../../../hooks/useAuth';
+import { useState } from 'react';
 
 let cx = classNames.bind(loginStyles, formStyles);
 let cxForms = classNames.bind(formStyles);
 
+const errors = {
+    emailError: ''
+}
+
 export const Login = () => {
     const navigate = useNavigate();
-    const { currentUser, userLogin } = useAuthContext();
+    const { currentUser } = useAuthContext();
+
+    const [values, setValues] = useState({
+        email: '',
+        password: ''
+    });
+
+    const [errors, setErrors] = useState({
+        emailError: '',
+        passwordError: ''
+    });
+
+    const changeHandler = (e) => {
+        setValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }))
+    }
+
+    const onBlurHandler = (e) => {
+        const errorField = e.target.name;
+
+        setErrors(state => ({
+            ...state,
+            [errorField]: !(e.target.value) ? false : true,
+            [errorField]: () => {
+                switch (errorField) {
+                    case 'email':
+                        
+                        break;
+                
+                    default:
+                        break;
+                }
+            },
+        }))
+    }
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -21,27 +62,14 @@ export const Login = () => {
 
         if (!currentUser) {
             try {
-                await userLogin(email, password);
+                await authService.login(email, password);
                 navigate('/');
             } catch (error) {
-                console.log(error);
+                alert(error);
             }
         }
 
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         const user = userCredential.user;
-        //         console.log(user);
 
-        //         setCurrentUser(user);
-        //         navigate('/home');
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-
-        //         console.log(`Error message: ${errorMessage}, error code: ${errorCode}`);
-        //     });
     }
 
     return (
@@ -56,10 +84,12 @@ export const Login = () => {
                 <h3>Login Here</h3>
 
                 <label htmlFor="email">Email</label>
-                <input type="text" placeholder="Email" id="email" name='email' />
+                <input type="text" placeholder="Email" id="email" name='email' value={values.email} onChange={changeHandler} onBlur={onBlurHandler} />
+                <p>Invalid email</p>
 
                 <label htmlFor="password">Password</label>
-                <input type="password" placeholder="Password" id="password" name='password' />
+                <input type="password" placeholder="Password" id="password" name='password' value={values.password} onChange={changeHandler} onBlur={onBlurHandler} />
+                <p>Invalid password</p>
 
                 <button>Log In</button>
 

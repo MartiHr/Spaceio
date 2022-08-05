@@ -42,9 +42,11 @@ export const Header = () => {
                         <li className={cx('nav-item')}>
                             <NavLink to="/rockets" className={setNavStyle}>Rockets</NavLink>
                         </li> */}
-                        <li className={cx('nav-item')}>
-                            <NavLink to="/create" className={setNavStyle}>Create</NavLink>
-                        </li>
+                        {currentUser &&
+                            <li className={cx('nav-item')}>
+                                <NavLink to="/create" className={setNavStyle}>Create</NavLink>
+                            </li>
+                        }
                         <li className={cx('nav-item')}>
                             <NavLink to="/about" className={setNavStyle}>About</NavLink>
                         </li>

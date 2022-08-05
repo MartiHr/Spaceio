@@ -6,7 +6,7 @@
 
 .login-background {
     width: 430px;
-    height: 520px;
+    min-height: 520px;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;

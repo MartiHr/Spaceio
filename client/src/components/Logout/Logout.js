@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/AuthContext';
+
+import * as authService from '../../services/authService';
 
 export const Logout = () => {
     const navigate = useNavigate();
-    const { userLogout } = useAuthContext();
 
     useEffect(() => {
-        handleLogout(userLogout);
+        handleLogout(authService.logout);
         navigate('/');
     }, []);
 
@@ -18,6 +18,6 @@ async function handleLogout(userLogout) {
     try {
         await userLogout();
     } catch (error) {
-        console.log(error);
+        alert(error);
     }
 }
