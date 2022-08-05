@@ -7,8 +7,6 @@ export const login = (email, password) => {
 }
 
 export const register = (email, password) => {
-    console.log('registering');
-    debugger
     return createUserWithEmailAndPassword(auth, email, password)
 }
 

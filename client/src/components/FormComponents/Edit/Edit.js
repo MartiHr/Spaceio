@@ -17,7 +17,7 @@ export const Edit = () => {
 
     useEffect(() => {
         vehicleService.getOne(vehicleId)
-            .then(result => updateVehicle(result));
+            .then(result => updateVehicle(result, vehicleId));
     }, []);
 
     const editHandler = (e) => {
