@@ -33,6 +33,13 @@ form label {
     font-weight: 500;
 }
 
+form span {
+    display: block;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    color: rgba(254, 90, 90, 0.713);
+}
+
 form input,
 form textarea {
     display: block;

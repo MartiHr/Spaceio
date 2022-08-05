@@ -13,11 +13,11 @@ export const useAuth = () => {
                 // const uid = user.uid;
                 const unsub = setCurrentUser(user);
                 return unsub;
-              } else {
+            } else {
                 // User is signed out
                 const unsub = setCurrentUser(null);
                 return unsub;
-              }
+            }
         })
     }, []);
 

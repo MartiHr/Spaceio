@@ -2,12 +2,12 @@ import { NavLink } from 'react-router-dom'
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.css';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 let cx = classNames.bind(styles);
 
 export const Header = () => {
-    const currentUser = useAuth();
+    const { currentUser } = useAuthContext();
 
     const setNavStyle = ({ isActive }) => {
         return isActive

@@ -6,13 +6,42 @@ import * as authService from '../../../services/authService';
 
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { useState } from 'react';
 
 let cx = classNames.bind(styles);
 let cxForms = classNames.bind(formStyles);
 
+const errors = {
+    emailError: ''
+}
+
 export const Register = () => {
     const navigate = useNavigate();
     const { currentUser } = useAuthContext();
+
+    const [errors, setErrors] = useState({
+        emailError: '',
+        passwordError: ''
+    });
+
+    const onBlurHandler = (e) => {
+        const errorField = e.target.name;
+
+        setErrors(state => ({
+            ...state,
+            [errorField]: !(e.target.value) ? false : true,
+            [errorField]: () => {
+                switch (errorField) {
+                    case 'email':
+                        
+                        break;
+                
+                    default:
+                        break;
+                }
+            },
+        }))
+    }
 
     const registerHandler = async (e) => {
         e.preventDefault();
@@ -38,13 +67,13 @@ export const Register = () => {
             <form className={cx('register-form')} onSubmit={registerHandler}>
                 <h3>Register Here</h3>
                 <label htmlFor="email">Email</label>
-                <input type="text" placeholder="Email" id="email" name='email' />
+                <input type="text" placeholder="Email" id="email" name='email' onBlur={onBlurHandler}/>
 
                 <label htmlFor="password">Password</label>
-                <input type="password" placeholder="Password" id="password" name='password' />
+                <input type="password" placeholder="Password" id="password" name='password' onBlur={onBlurHandler}/>
 
                 <label htmlFor="repassword">Repeat password</label>
-                <input type="password" placeholder="Repeat password" id="repassword" />
+                <input type="password" placeholder="Repeat password" id="repassword" onBlur={onBlurHandler}/>
 
                 <button>Sign Up</button>
 

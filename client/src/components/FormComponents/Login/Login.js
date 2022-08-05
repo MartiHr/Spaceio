@@ -11,10 +11,6 @@ import { useState } from 'react';
 let cx = classNames.bind(loginStyles, formStyles);
 let cxForms = classNames.bind(formStyles);
 
-const errors = {
-    emailError: ''
-}
-
 export const Login = () => {
     const navigate = useNavigate();
     const { currentUser } = useAuthContext();
@@ -24,10 +20,7 @@ export const Login = () => {
         password: ''
     });
 
-    const [errors, setErrors] = useState({
-        emailError: '',
-        passwordError: ''
-    });
+    const [hasErrors, setHasErrors] = useState(false);
 
     const changeHandler = (e) => {
         setValues(state => ({
@@ -36,24 +29,7 @@ export const Login = () => {
         }))
     }
 
-    const onBlurHandler = (e) => {
-        const errorField = e.target.name;
 
-        setErrors(state => ({
-            ...state,
-            [errorField]: !(e.target.value) ? false : true,
-            [errorField]: () => {
-                switch (errorField) {
-                    case 'email':
-                        
-                        break;
-                
-                    default:
-                        break;
-                }
-            },
-        }))
-    }
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -65,7 +41,8 @@ export const Login = () => {
                 await authService.login(email, password);
                 navigate('/');
             } catch (error) {
-                alert(error);
+                // alert(error.message.split('Firebase: ').pop());
+                setHasErrors(true);
             }
         }
 
@@ -74,8 +51,6 @@ export const Login = () => {
 
     return (
         <>
-            {/* {currentUser.email} */}
-            {/* {currentUser !== null ? alert('logged in') : alert('fuck')} */}
             <div className={cx('login-background')}>
                 <div className={cx('shape')} />
                 <div className={cx('shape')} />
@@ -84,12 +59,14 @@ export const Login = () => {
                 <h3>Login Here</h3>
 
                 <label htmlFor="email">Email</label>
-                <input type="text" placeholder="Email" id="email" name='email' value={values.email} onChange={changeHandler} onBlur={onBlurHandler} />
-                <p>Invalid email</p>
+                <input type="text" placeholder="Email" id="email" name='email' value={values.email} onChange={changeHandler} />
 
                 <label htmlFor="password">Password</label>
-                <input type="password" placeholder="Password" id="password" name='password' value={values.password} onChange={changeHandler} onBlur={onBlurHandler} />
-                <p>Invalid password</p>
+                <input type="password" placeholder="Password" id="password" name='password' value={values.password} onChange={changeHandler} />
+                {hasErrors
+                    ? <span>Invalid email or password</span>
+                    : null
+                }
 
                 <button>Log In</button>
 
