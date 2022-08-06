@@ -49,14 +49,22 @@ export const edit = async (id, newData, oldData) => {
     return { ...decoratedData, _id: docRef.id };
 }
 
-export const update = async (id, newData, oldData) => {
+export const updateLikes = async (id, oldData, likes) => {
     const decoratedData = {
-        ...newData,
-        likes: newData.likes,
-        creationDate: oldData.creationDate,
-        updatedOn: Timestamp.now(),
-        ownerId: oldData.ownerId,
-        // TODO: fix comments
+        ...oldData,
+        likes,
+    };
+
+    const docRef = doc(db, 'vehicles', id);
+    const docSnap = await setDoc(docRef, decoratedData);
+
+    return { ...decoratedData, _id: docRef.id };
+}
+
+export const updateComments = async (id, oldData, comments) => {
+    const decoratedData = {
+        ...oldData,
+        comments
     };
 
     const docRef = doc(db, 'vehicles', id);

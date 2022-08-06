@@ -105,7 +105,7 @@
     gap: 2rem;
 }
 
-.comments-title {
+.comments-wrapper .comments-title {
     font-style: italic;
     color: var(--clr-white);
     font-weight: bold;
@@ -142,10 +142,16 @@
     color: var(--clr-white);
 }
 
-
 .comments-wrapper textarea {
     padding-left: 0.5rem;
     max-width: 550px;
+}
+
+.comments-wrapper span {
+    color: var(--clr-white);
+    position: relative;
+    top: -1rem;
+    color: rgba(254, 90, 90, 0.713);;
 }
 
 .comments-wrapper textarea::placeholder {
@@ -163,6 +169,11 @@
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.comments-wrapper p {
+    font-size: 1.5rem;
+    word-wrap: break-word;
 }
 
 button:hover {
