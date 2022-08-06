@@ -75,7 +75,6 @@ export const VehicleProvider = ({
             vehicles,
             addVehicle,
             updateVehicle,
-            // addComment,
             removeVehicle,
             selectVehicle,
         }}>

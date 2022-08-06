@@ -16,17 +16,18 @@ export const Details = () => {
     const { currentUser } = useAuthContext();
     const [ hasLiked, setHasLiked] = useState(false);
     const [ isOwner, setIsOwner] = useState(false);
+    const [ newComment, setNewComment] = '';
 
     const currentVehicle = selectVehicle(vehicleId);
-
-    console.log(isOwner);
 
     useEffect(() => {
         vehicleService.getOne(vehicleId)
             .then(result => updateVehicle(result, vehicleId));
 
-        setHasLiked(currentVehicle.likes.some(x => x === currentUser.uid));
-        setIsOwner(currentVehicle.ownerId === currentUser.uid);
+        if (currentUser) {
+            setHasLiked(currentVehicle.likes.some(x => x === currentUser?.uid));
+            setIsOwner(currentVehicle.ownerId === currentUser?.uid);
+        }
     }, []);
 
     const onDelete = (id) => {
@@ -72,6 +73,13 @@ export const Details = () => {
         }
     }
 
+    const changeHandler = (e) => {
+        setValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }))
+    }
+
     return (
         <>
             <div className={cx('details-wrapper')}>
@@ -100,6 +108,29 @@ export const Details = () => {
                     </div>
 
                 </div>
+            </div>
+            <div className={(cx('comments-wrapper'))}>
+                <p className={(cx('comments-title'))}>Comments :</p>
+
+                <div className={(cx('comments-item'))}>
+                    <p className={cx('comments-item-email')}>email@gmail.com</p>
+                    <p className={cx('comments-item-value')}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, sit itaque vero assumenda illo, adipisci laboriosam exercitationem nostrum veniam porro necessitatibus libero obcaecati deleniti expedita earum culpa velit beatae est.</p>
+                </div>
+                <div className={(cx('comments-item'))}>
+                    <p className={cx('comments-item-email')}>email@gmail.com</p>
+                    <p className={cx('comments-item-value')}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, sit itaque vero assumenda illo, adipisci laboriosam exercitationem nostrum veniam porro necessitatibus libero obcaecati deleniti expedita earum culpa velit beatae est.</p>
+                </div>
+                <div className={(cx('comments-item'))}>
+                    <p className={cx('comments-item-email')}>email@gmail.com</p>
+                    <p className={cx('comments-item-value')}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, sit itaque vero assumenda illo, adipisci laboriosam exercitationem nostrum veniam porro necessitatibus libero obcaecati deleniti expedita earum culpa velit beatae est.</p>
+                </div>
+
+                <label htmlFor="Comment">Create comment</label>
+                <textarea placeholder="Description" id="Comment" rows="10" cols="50" name='description' />
+                {/* value={values.description} onChange={changeHandler} onBlur={onErrorHandler} className={cxForms(`${errors.descriptionError.length > 0 ? 'is-invalid' : ''}`)}  */}
+                {/* <span>{errors.descriptionError}</span> */}
+
+                <button>Comment</button>
             </div>
 
         </>
