@@ -22,7 +22,7 @@ export const CardItem = ({vehicle}) => {
                     <div className={cx('card-info-item', 'card-info-likes')}>
                         <i className="fa-solid fa-heart"></i>
                         <p className={cx('card-info-attribute')}>Likes</p>
-                        <p className={cx('card-info-value')}>{vehicle.likes}</p>
+                        <p className={cx('card-info-value')}>{vehicle.likes.length}</p>
                     </div>
                     <div className={cx('card-info-item', 'card-info-comments')}>
                         <i className="fa-solid fa-comment"></i>

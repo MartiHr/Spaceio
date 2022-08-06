@@ -7,12 +7,14 @@ import * as vehicleService from '../../../services/vehicleService';
 import { useVehicleContext } from '../../../contexts/VehicleContext';
 import { useState } from 'react';
 import { getErrorMessage } from '../../../utils/errorUtil';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 const cx = classnames.bind(styles);
 let cxForms = classnames.bind(formStyles);
 
 export const Create = () => {
     const { addVehicle } = useVehicleContext();
+    const { currentUser } = useAuthContext();
 
     const [values, setValues] = useState({
         type: '',
@@ -65,7 +67,7 @@ export const Create = () => {
         if (Object.values(errors).some(error => error.length !== 0  || error === false)) {
             return;
         } else {
-            vehicleService.create(vehicleData)
+            vehicleService.create(vehicleData, currentUser.uid)
                 .then(result => addVehicle(result));
 
             e.target.reset();

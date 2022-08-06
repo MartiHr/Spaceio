@@ -48,6 +48,8 @@ export const VehicleProvider = ({
     }
    
     const updateVehicle = (vehicleData, vehicleId) => {
+        // debugger
+
         dispatch({
             type: 'UPDATE_VEHICLE',
             payload: vehicleData,

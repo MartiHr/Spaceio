@@ -47,6 +47,8 @@
 }
 
 .details-right-side p {
+    overflow-wrap: break-word;
+
     font-size: 2rem;
 }
 

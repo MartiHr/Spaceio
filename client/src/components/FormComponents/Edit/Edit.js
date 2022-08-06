@@ -27,11 +27,11 @@ export const Edit = () => {
     });
 
     const [errors, setErrors] = useState({
-        typeError: false,
-        modelError: false,
-        imgUrlError: false,
-        priceError: false,
-        descriptionError: false
+        typeError: '',
+        modelError: '',
+        imgUrlError: '',
+        priceError: '',
+        descriptionError: ''
     });
 
     const changeHandler = (e) => {
@@ -68,18 +68,15 @@ export const Edit = () => {
 
         let vehicleData = Object.fromEntries(formData);
 
-        Object.keys(vehicleData).forEach(key => setError(key, vehicleData[key]));
-        const hasDataErrors = Object.values(errors).some(error => error.length !== 0 || error === false);
+        const hasDataErrors = Object.values(errors).some(error => error.length !== 0);
 
-        if (hasDataErrors) {
-            return;
-        } else {
+        if (!hasDataErrors) {
             vehicleService.edit(vehicleId, vehicleData, currentVehicle)
             .then(result => {
                 updateVehicle(result, vehicleId);
                 navigate(`/details/${vehicleId}`)
             });
-        }
+        } 
     }
 
     return (

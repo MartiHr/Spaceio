@@ -25,8 +25,8 @@ export const getOne = async (id) => {
     }
 }
 
-export const create = async (data) => {
-    const decoratedData = { ...data, likes: 0, creationDate: Timestamp.now() };
+export const create = async (data, ownerId) => {
+    const decoratedData = { ...data, likes: [], comments: [], creationDate: Timestamp.now(), ownerId };
 
     const docRef = await addDoc(vehiclesRef, decoratedData);
 
@@ -37,11 +37,27 @@ export const edit = async (id, newData, oldData) => {
     const decoratedData = {
         ...newData,
         likes: oldData.likes,
+        comments: oldData.comments,
         creationDate: oldData.creationDate,
-        updatedOn: Timestamp.now()
+        updatedOn: Timestamp.now(),
+        ownerId: oldData.ownerId,
     };
 
-    // debugger
+    const docRef = doc(db, 'vehicles', id);
+    const docSnap = await setDoc(docRef, decoratedData);
+
+    return { ...decoratedData, _id: docRef.id };
+}
+
+export const update = async (id, newData, oldData) => {
+    const decoratedData = {
+        ...newData,
+        likes: newData.likes,
+        creationDate: oldData.creationDate,
+        updatedOn: Timestamp.now(),
+        ownerId: oldData.ownerId,
+        // TODO: fix comments
+    };
 
     const docRef = doc(db, 'vehicles', id);
     const docSnap = await setDoc(docRef, decoratedData);
