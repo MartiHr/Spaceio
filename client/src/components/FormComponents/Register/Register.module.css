@@ -2,7 +2,7 @@
 
 .register-form {
     margin: 1rem auto;
-    height: 650px;
+    min-height: 650px;
 }
 
 .register-background {

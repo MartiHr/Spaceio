@@ -29,8 +29,6 @@ export const Login = () => {
         }))
     }
 
-
-
     const loginHandler = async (e) => {
         e.preventDefault();
 
@@ -41,12 +39,9 @@ export const Login = () => {
                 await authService.login(email, password);
                 navigate('/');
             } catch (error) {
-                // alert(error.message.split('Firebase: ').pop());
                 setHasErrors(true);
             }
         }
-
-
     }
 
     return (
