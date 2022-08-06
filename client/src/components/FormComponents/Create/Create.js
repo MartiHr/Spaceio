@@ -23,11 +23,11 @@ export const Create = () => {
     });
 
     const [errors, setErrors] = useState({
-        typeError: '',
-        modelError: '',
-        imgUrlError: '',
-        priceError: '',
-        descriptionError: ''
+        typeError: false,
+        modelError: false,
+        imgUrlError: false,
+        priceError: false,
+        descriptionError: false
     });
 
     const changeHandler = (e) => {
@@ -38,11 +38,12 @@ export const Create = () => {
     }
 
     const setError = (errorField, value) => {
+        const errorMsg = getErrorMessage(errorField, value);
+
         setErrors(state => ({
             ...state,
-            [`${errorField}Error`]: getErrorMessage(errorField, value),
-            generalError: ''
-        }))
+            [`${errorField}Error`]: errorMsg,
+        }));
     }
 
     const onErrorHandler = (e) => {
@@ -58,11 +59,10 @@ export const Create = () => {
         const formData = new FormData(e.target);
 
         let vehicleData = Object.fromEntries(formData);
-       
-        Object.keys(vehicleData).forEach(key => setError(key, vehicleData[key]));
-        const hasErrors = Object.values(errors).some(error => error.length === 0);
 
-        if (hasErrors) {
+        Object.keys(vehicleData).forEach(key => setError(key, vehicleData[key]));
+
+        if (Object.values(errors).some(error => error.length !== 0  || error === false)) {
             return;
         } else {
             vehicleService.create(vehicleData)

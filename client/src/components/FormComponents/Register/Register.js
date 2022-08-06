@@ -23,10 +23,10 @@ export const Register = () => {
     });
 
     const [errors, setErrors] = useState({
-        emailError: '',
-        passwordError: '',
-        rePassError: '',
-        generalError: ''
+        emailError: false,
+        passwordError: false,
+        rePassError: false,
+        generalError: false
     });
 
     const changeHandler = (e) => {
@@ -63,7 +63,7 @@ export const Register = () => {
         }
 
         Object.keys(userData).forEach(key => setError(key, userData[key]));
-        const hasDataErrors = Object.values(errors).some(error => error.length === 0);
+        const hasDataErrors = Object.values(errors).some(error => error.length !== 0 || error === false);
 
         if (!currentUser || hasDataErrors) {
             try {
