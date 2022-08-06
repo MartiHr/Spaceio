@@ -1,7 +1,7 @@
 .edit-form {
     margin-bottom: 2rem;
     width: 900px;
-    height: 850px;
+    min-height: 850px;
 }
 
 .radiance-background {

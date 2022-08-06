@@ -7,26 +7,10 @@ import * as authService from '../../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useState } from 'react';
+import { errorMessages, getErrorMessage } from '../../../utils/errorUtil';
 
 let cx = classNames.bind(styles);
 let cxForms = classNames.bind(formStyles);
-
-const errorMessages = {
-    emailError: 'Email should be longer than 3 characters',
-    passwordError: 'Password should be at least 6 characters long',
-    rePassError: 'Password and repeat password do not match'
-}
-
-function setError(errorField, value) {
-    switch (errorField) {
-        case 'email':
-            return value.length <= 3 ? errorMessages.emailError : '';
-        case 'password':
-            return value.length < 6 ? errorMessages.passwordError : '';
-        default:
-            return '';
-    }
-}
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -52,29 +36,36 @@ export const Register = () => {
         }))
     }
 
+    const setError = (errorField, value) => {
+        setErrors(state => ({
+            ...state,
+            [`${errorField}Error`]: getErrorMessage(errorField, value),
+            generalError: ''
+        }))
+    }
 
-    const onBlurHandler = (e) => {
+    const onErrorHandler = (e) => {
         const errorField = e.target.name;
         const value = e.target.value;
 
-        setErrors(state => ({
-            ...state,
-            [`${errorField}Error`]: setError(errorField, value),
-            generalError: ''
-        }))
+        setError(errorField, value)
     }
 
     const registerHandler = async (e) => {
         e.preventDefault();
 
-        const { email, password, rePass } = Object.fromEntries(new FormData(e.target));
+        const userData = Object.fromEntries(new FormData(e.target));
+        const { email, password, rePass } = userData;
 
         if (password !== rePass) {
             setErrors(state => ({ ...state, rePassError: errorMessages.rePassError }));
             return;
         }
 
-        if (!currentUser) {
+        Object.keys(userData).forEach(key => setError(key, userData[key]));
+        const hasDataErrors = Object.values(errors).some(error => error.length === 0);
+
+        if (!currentUser || hasDataErrors) {
             try {
                 await authService.register(email, password);
                 navigate('/');
@@ -98,16 +89,16 @@ export const Register = () => {
             <form className={cx('register-form')} onSubmit={registerHandler}>
                 <h3>Register Here</h3>
                 <label htmlFor="email">Email</label>
-                <input type="text" placeholder="Email" id="email" name='email' value={values.email} onChange={changeHandler} onBlur={onBlurHandler} className={errors.emailError.length > 0 ? cxForms('is-invalid') : 'a'}/>
+                <input type="text" placeholder="Email" id="email" name='email' value={values.email} onChange={changeHandler} onBlur={onErrorHandler} className={errors.emailError.length > 0 ? cxForms('is-invalid') : 'a'} />
                 <span>{errors.emailError}</span>
 
                 <label htmlFor="password">Password</label>
-                <input type="password" placeholder="Password" id="password" name='password' value={values.password} onChange={changeHandler} onBlur={onBlurHandler} className={errors.passwordError.length > 0 ? cxForms('is-invalid') : 'a'}/>
+                <input type="password" placeholder="Password" id="password" name='password' value={values.password} onChange={changeHandler} onBlur={onErrorHandler} className={errors.passwordError.length > 0 ? cxForms('is-invalid') : 'a'} />
                 <span>{errors.passwordError}</span>
 
 
                 <label htmlFor="rePass">Repeat password</label>
-                <input type="password" placeholder="Repeat password" id="rePass" name='rePass' value={values.rePass} onChange={changeHandler} onBlur={onBlurHandler} className={errors.rePassError.length > 0 ? cxForms('is-invalid') : 'a'}/>
+                <input type="password" placeholder="Repeat password" id="rePass" name='rePass' value={values.rePass} onChange={changeHandler} onBlur={onErrorHandler} className={errors.rePassError.length > 0 ? cxForms('is-invalid') : 'a'} />
                 <span>{errors.rePassError}</span>
                 <span>{errors.generalError}</span>
 
