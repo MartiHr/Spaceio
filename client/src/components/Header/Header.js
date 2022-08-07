@@ -25,7 +25,9 @@ export const Header = () => {
                         alt=""
                     />
                 </NavLink>
-                <h1>Spaceio</h1>
+                <NavLink className={cx('title-link')} to="/">
+                    <h1 className={cx('header-title')}>Spaceio</h1>
+                </NavLink>
             </div>
             <div className={cx('nav', 'nav-right')}>
                 <nav className={cx('navigation')}>
@@ -36,12 +38,6 @@ export const Header = () => {
                         <li className={cx('nav-item')}>
                             <NavLink to="/catalog" className={setNavStyle}>Catalog</NavLink>
                         </li>
-                        {/* <li className={cx('nav-item')}>
-                            <NavLink to="/ships" className={setNavStyle}>Ships</NavLink>
-                        </li>
-                        <li className={cx('nav-item')}>
-                            <NavLink to="/rockets" className={setNavStyle}>Rockets</NavLink>
-                        </li> */}
                         {currentUser &&
                             <li className={cx('nav-item')}>
                                 <NavLink to="/create" className={setNavStyle}>Create</NavLink>
@@ -56,7 +52,6 @@ export const Header = () => {
                     </ul>
                 </nav>
                 <nav className={cx('authentication')}>
-                    {/* {currentUser ? <h1>Logged in</h1> : <h1>Not logged</h1>} */}
                     <ul className={cx('nav-wrapper')}>
                         {!currentUser
                             ? <>
@@ -75,8 +70,6 @@ export const Header = () => {
                             </>
 
                         }
-
-
                     </ul>
                 </nav>
             </div>

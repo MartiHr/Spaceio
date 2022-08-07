@@ -72,11 +72,12 @@ export const Edit = () => {
 
         if (!hasDataErrors) {
             vehicleService.edit(vehicleId, vehicleData, currentVehicle)
-            .then(result => {
-                updateVehicle(result, vehicleId);
-                navigate(`/details/${vehicleId}`)
-            });
-        } 
+                .then(result => {
+                    updateVehicle(result, vehicleId);
+                    navigate(`/details/${vehicleId}`)
+                })
+                .catch(error => alert(error));
+        }
     }
 
     return (

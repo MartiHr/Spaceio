@@ -68,7 +68,8 @@ export const Create = () => {
             return;
         } else {
             vehicleService.create(vehicleData, currentUser.uid)
-                .then(result => addVehicle(result));
+                .then(result => addVehicle(result))
+                .catch(error => alert(error));
 
             e.target.reset();
         }

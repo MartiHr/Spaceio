@@ -35,8 +35,11 @@ export const Details = () => {
     }, []);
 
     const onDelete = (id) => {
-        vehicleService.remove(id)
-            .then(result => removeVehicle(result));
+        if (window.confirm("Do you really want to delete this vehicle?")) {
+            vehicleService.remove(id)
+                .then(result => removeVehicle(result))
+                .catch(error => alert(error));
+        }
     }
 
     const likeHandler = (e) => {
@@ -48,7 +51,6 @@ export const Details = () => {
             return vehicleService.updateLikes(vehicleId, currentVehicle, newLikes)
                 .then(result => {
                     updateVehicle(result, vehicleId);
-                    navigate(`/details/${vehicleId}`)
                 });
         } else {
             alert('You have already liked this post!');
@@ -64,7 +66,6 @@ export const Details = () => {
             return vehicleService.updateLikes(vehicleId, currentVehicle, newLikes)
                 .then(result => {
                     updateVehicle(result, vehicleId);
-                    navigate(`/details/${vehicleId}`)
                 });
         } else {
             alert('You have already unliked this post!');
@@ -87,20 +88,13 @@ export const Details = () => {
         if (commentError.length === 0 && commentError !== false) {
             setCommentError('');
 
-            const commentInput = document.getElementById('comment').value;
-
-            const newCommentData = { comment: { email: currentUser.email, value: commentInput } };
+            const newCommentData = { comment: { email: currentUser.email, value: newComment } };
             const newComments = [...currentVehicle.comments, newCommentData];
-
-            newComments.forEach(x => console.log(x.comment.email))
-
-            let aComments = newComments;
-            console.log(aComments);
 
             return vehicleService.updateComments(vehicleId, currentVehicle, newComments)
                 .then(result => {
                     updateVehicle(result, vehicleId);
-                    navigate(`/details/${vehicleId}`)
+                    setNewComment('');
                 });
         } else {
             setCommentError('Comment should be at least 5 character');
@@ -139,13 +133,14 @@ export const Details = () => {
             <div className={(cx('comments-wrapper'))}>
                 <p className={(cx('comments-title'))}>Comments :</p>
 
-                {currentVehicle.comments?.length > 0 &&
-                    currentVehicle.comments.map(x => x.comment).map(comment =>
+                {currentVehicle.comments?.length > 0
+                    ? currentVehicle.comments.map(x => x.comment).map(comment =>
                         <div key={nextId()} className={(cx('comments-item'))}>
                             <p className={cx('comments-item-email')}>{comment.email}: </p>
                             <p className={cx('comments-item-value')}>{comment.value}</p>
                         </div>
                     )
+                    : <h2 className={cx('no-comment')}>No comment yet!</h2>
                 }
 
                 {currentUser &&
@@ -153,7 +148,6 @@ export const Details = () => {
                         <label htmlFor="comment">Create comment</label>
                         <textarea placeholder="Description" id="comment" rows="10" cols="50" name='newComment' value={newComment} onChange={changeHandler} onBlur={onErrorHandler} />
                         <span>{commentError}</span>
-                        {/* value={values.description} onChange={changeHandler} onBlur={onErrorHandler} className={cxForms(`${errors.descriptionError.length > 0 ? 'is-invalid' : ''}`)}  */}
 
                         <button onClick={addCommentHandler}>Comment</button>
                     </>

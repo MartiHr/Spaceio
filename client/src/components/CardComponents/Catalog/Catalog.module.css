@@ -5,10 +5,24 @@
     border: 1px solid black;
     border-top: none;
 
-    padding: 5rem;
+    padding: 7rem 5rem 5rem 5rem;
 
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 4rem;
+
+    position: relative;
+}
+
+.catalog-title {
+    font-size: 2rem;
+    width: calc(100% - 10rem);
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
 }

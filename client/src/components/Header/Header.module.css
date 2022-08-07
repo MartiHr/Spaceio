@@ -17,6 +17,20 @@
     display: flex;
 }
 
+.nav-left {
+    font-weight: bolder;
+    display: flex;
+}
+
+.header-title {
+    color: var(--clr-black);
+}
+
+.title-link {
+    text-decoration: none;
+    color: var(--clr-black);
+}
+
 .nav-right {
     width: 65%;
 
