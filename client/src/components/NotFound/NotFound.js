@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import styles from './NotFound.module.css';
 import classNames from 'classnames/bind';
 

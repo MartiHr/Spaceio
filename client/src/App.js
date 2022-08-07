@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
