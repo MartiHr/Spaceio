@@ -4,7 +4,7 @@ import formStyles from '../../FormComponents/Form.module.css';
 
 import * as authService from '../../../services/authService';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useState } from 'react';
 
@@ -67,12 +67,13 @@ export const Login = () => {
                 <button>Log In</button>
 
                 <div className={cxForms('social')}>
-                    <div className={cxForms('go')}>
+                    <p>or you could also <Link to="/register">Sign Up</Link></p>
+                    {/* <div className={cxForms('go')}>
                         <i className="fab fa-google" /> Google
                     </div>
                     <div className={cxForms('fb')}>
                         <i className="fab fa-facebook" /> Facebook
-                    </div>
+                    </div> */}
                 </div>
             </form>
         </>

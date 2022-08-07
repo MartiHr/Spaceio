@@ -84,8 +84,18 @@ form button {
 }
 
 .social {
-    margin-top: 30px;
+    margin-top: 1rem;
     display: flex;
+    
+    font-size: 1.2rem;
+
+    position: relative;
+    bottom: -1rem;
+}
+
+.social a {
+    text-decoration: underline;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .social div {
