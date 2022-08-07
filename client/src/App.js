@@ -18,6 +18,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { Home } from './components/CardComponents/Home/Home';
 import { About } from './components/About/About';
 import { Help } from './components/Help/Help';
+import { NotFound } from './components/NotFound/NotFound';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -68,7 +69,7 @@ function App() {
                                 <Route path='/create' element={<Create />} />
                                 <Route path='/logout' element={<Logout />} />
                             </Route>
-                            {/* <Route path="/*" element={<NotFound />}/> */}
+                            <Route path="/*" element={<NotFound />}/>
                         </Routes>
                     </main>
                 </VehicleProvider>
