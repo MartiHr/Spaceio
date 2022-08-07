@@ -1,16 +1,15 @@
 .edit-form {
     margin-bottom: 2rem;
-    width: 900px;
+    width: 100%;
+    min-width: 325px;
+    max-width: 900px;
     min-height: 850px;
 }
 
 .radiance-background {
+    object-fit: contain;
     position: absolute;
     right: 10rem;
     bottom: 0;
     height: 950px;
 }
-
-/* .create-button {
-    margin-top: 8rem;
-} */

@@ -3,6 +3,7 @@
 .register-form {
     margin: 1rem auto;
     min-height: 650px;
+    max-width: 600px;
 }
 
 .register-background {
@@ -36,3 +37,8 @@
     bottom: -140px;
 }
 
+@media screen and (max-width: 600px) {
+    .register-background {
+        display: none;
+    }
+}

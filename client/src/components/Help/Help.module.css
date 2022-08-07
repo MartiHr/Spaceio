@@ -37,3 +37,9 @@
 .about-wrapper li::marker {
     font-size: 1.5rem;
 }
+
+@media screen and (max-width: 725px) {
+    .about-wrapper {
+        padding-left: 0;
+    }
+}

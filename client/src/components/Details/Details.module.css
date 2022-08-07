@@ -149,6 +149,7 @@
 .comments-wrapper textarea {
     padding-left: 0.5rem;
     max-width: 550px;
+    width: 90%;
 }
 
 .comments-wrapper span {
@@ -166,6 +167,7 @@
 .comments-wrapper button {
     margin-right: 3%;
     width: 10%;
+    min-width: 150px;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 0;
@@ -182,4 +184,60 @@
 
 button:hover {
     background-color: var(--clr-blue);
+}
+
+
+@media screen and (max-width: 1250px) {
+    .details-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .details-right-side,
+    .details-left-side {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 680px) {
+    .buttons-wrapper {
+        flex-direction: column;
+    }
+
+    .details-right-side button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .details-wrapper {
+        border: 1rem solid black;
+    }
+
+    .comments-wrapper {
+        border: 0.8rem solid black;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    .details-right-side p {
+        font-size: 1.5rem;
+    }
+
+    .comments-wrapper .comments-title {
+        font-size: 2rem;
+    }
+
+    .comments-wrapper p {
+        font-size: 1rem;
+    }
+}
+
+
+@media screen and (max-width: 490px) {
+    .details-right-side {
+        padding: 0rem 2rem 0rem 2rem;
+    }
 }

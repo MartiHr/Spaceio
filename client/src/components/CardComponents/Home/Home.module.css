@@ -3,7 +3,6 @@
     gap: var(--gap-space);
     justify-content: space-evenly;
     margin-top: 4rem;
-
 }
 
 .home-title {
@@ -17,4 +16,12 @@
 .hot-vehicles-none {
     font-size: 3rem;
     color: var(--clr-gray);
+}
+
+
+@media screen and (max-width: 1300px) {
+    .home-wrapper {
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
 }

@@ -1,7 +1,7 @@
 .credits {
     text-align: center;
 
-    height: 70px;
+    min-height: 70px;
     width: 100%;
 
     background-color: var(--clr-blue);

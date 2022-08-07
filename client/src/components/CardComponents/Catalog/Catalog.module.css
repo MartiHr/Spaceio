@@ -26,3 +26,16 @@
     position: absolute;
     top: 0;
 }
+
+@media screen and (max-width: 1470px) {
+    .catalog-wrapper {
+        justify-content: space-evenly;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    .catalog-wrapper {
+        border: none;
+    }
+}
