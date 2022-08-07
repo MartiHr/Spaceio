@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import { CardItem } from '../CardItem/CardItem';
 import { useEffect, useState } from 'react';
 import * as vehicleService from '../../../services/vehicleService';
-// import { useVehicleContext } from '../../../contexts/VehicleContext';
 
 let cx = classNames.bind(styles);
 

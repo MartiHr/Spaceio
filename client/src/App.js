@@ -16,6 +16,8 @@ import { Logout } from './components/Logout/Logout';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { Home } from './components/CardComponents/Home/Home';
+import { About } from './components/About/About';
+import { Help } from './components/Help/Help';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -58,6 +60,8 @@ function App() {
                             <Route path='/login' element={<Login />} />
                             <Route path='/register' element={<Register />} />
                             <Route path='/catalog' element={<Catalog />} />
+                            <Route path='/about' element={<About />} />
+                            <Route path='/help' element={<Help />} />
                             <Route path='/details/:vehicleId' element={<Details />} />
                             <Route element={<PrivateRoute />}>
                                 <Route path='/edit/:vehicleId' element={<Edit />} />

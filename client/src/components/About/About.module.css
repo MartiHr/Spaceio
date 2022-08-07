@@ -1,0 +1,51 @@
+.about-wrapper {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.about-wrapper p {
+    margin-bottom: 3rem;
+}
+
+.about-left,
+.about-right {
+    width: 50%;
+}
+
+.logos-wrapper {
+    display: flex;
+}
+
+.about-left img {
+    width: 50%;
+    height: 300px;
+    object-fit: contain;
+}
+
+.about-wrapper .me-img {
+    margin: auto;
+    max-height: 700px;
+    border-radius: 10rem;
+    /* object-fit: contain; */
+
+}
+
+@media screen and (max-width: 1200px) {
+    .about-wrapper {
+        flex-direction: column;
+        gap: 3rem;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .logos-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-left img {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
