@@ -72,3 +72,8 @@
     box-shadow: inset 200px 10px 0 0 var(--clr-gray);
 }
 
+@media screen and (max-width: 1650px) {
+    .nav-right {
+        flex-direction: column;
+    }
+}

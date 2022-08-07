@@ -11,7 +11,7 @@ export const About = () => {
                     <h2>ABOUT</h2>
                     <p>Spaceio is a web application which stores data about space vehicles and presents them in an orderly manner.
                         It was build by using REACT and FIRESTORE as base technologies.
-                        The jedi picture is unedited and it is me. 😁</p>
+                        The jedi picture is unedited and the person is me. 😁</p>
 
                     <div className={cx('logos-wrapper')}>
                         <img src="/static/images/react-icon.png" alt="" />
