@@ -21,11 +21,16 @@ html {
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: var(--gap-space);
 }
 
 .app-black {
     background-color: var(--clr-black);
+}
+
+main {
+    min-height: 60vh;
 }
 
 button:hover {

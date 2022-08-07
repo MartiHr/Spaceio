@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
-import { Home } from './components/Home/Home';
 import { Login } from './components/FormComponents/Login/Login';
 import { Register } from './components/FormComponents/Register/Register';
 import { Edit } from './components/FormComponents/Edit/Edit';
@@ -16,6 +15,7 @@ import { VehicleProvider } from './contexts/VehicleContext';
 import { Logout } from './components/Logout/Logout';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import { Home } from './components/CardComponents/Home/Home';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
