@@ -4,7 +4,7 @@ import { collection, doc, getDocs, getDoc, addDoc, setDoc, deleteDoc, query, ord
 const vehiclesRef = collection(db, "vehicles");
 
 export const getAll = async () => {
-    const q = query(vehiclesRef, orderBy("creationDate"));
+    const q = query(vehiclesRef, orderBy("creationDate", "desc"));
     const snapshot = await getDocs(q);
 
     return snapshot.docs.map(doc => ({

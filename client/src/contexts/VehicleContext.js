@@ -9,7 +9,7 @@ const vehicleReducer = (state, action) => {
         case 'ADD_VEHICLES':
             return action.payload.slice();
         case 'ADD_VEHICLE':
-            return [...state, action.payload];
+            return [action.payload, ...state];
         case 'UPDATE_VEHICLE':
             return state.map(x => x._id === action.vehicleId ? action.payload : x);
         case 'REMOVE_VEHICLE':
