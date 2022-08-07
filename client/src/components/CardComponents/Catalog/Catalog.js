@@ -11,8 +11,6 @@ export const Catalog = () => {
 
     const { vehicles } = useVehicleContext();
 
-    console.log(vehicles);
-
     return (
         <section className={cx('catalog-wrapper')}>
             {vehicles?.map(vehicle => <CardItem key={vehicle._id} vehicle={vehicle} />)}

@@ -27,12 +27,12 @@ export const CardItem = ({vehicle}) => {
                     <div className={cx('card-info-item', 'card-info-comments')}>
                         <i className="fa-solid fa-comment"></i>
                         <p className={cx('card-info-attribute')}>Comments</p>
-                        <p className={cx('card-info-value')}>106</p>
+                        <p className={cx('card-info-value')}>{vehicle.comments.length}</p>
                     </div>
                     <div className={cx('card-info-item', 'card-info-stars')}>
                         <i className="fa-solid fa-star"></i>
-                        <p className={cx('card-info-attribute')}>Stars</p>
-                        <p className={cx('card-info-value')}>4.4</p>
+                        <p className={cx('card-info-attribute')}>Rating</p>
+                        <p className={cx('card-info-value')}>{((vehicle.likes.length + vehicle.comments.length) * 0.3).toFixed(1)}</p>
                     </div>
                 </div>
             </div>
