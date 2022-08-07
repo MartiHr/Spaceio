@@ -35,7 +35,7 @@ export const Details = () => {
     }, []);
 
     const onDelete = (id) => {
-        if (window.confirm("Do you really want to delete this vehicle?")) {
+        if (window.confirm('Do you really want to delete this vehicle?')) {
             vehicleService.remove(id)
                 .then(result => removeVehicle(result))
                 .catch(error => alert(error));

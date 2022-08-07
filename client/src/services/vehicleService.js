@@ -1,10 +1,20 @@
 import { db } from "../firebase";
-import { collection, doc, getDocs, getDoc, addDoc, setDoc, deleteDoc, query, orderBy, Timestamp } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, addDoc, setDoc, deleteDoc, query, orderBy, Timestamp, limit } from "firebase/firestore";
 
 const vehiclesRef = collection(db, "vehicles");
 
 export const getAll = async () => {
     const q = query(vehiclesRef, orderBy("creationDate", "desc"));
+    const snapshot = await getDocs(q);
+
+    return snapshot.docs.map(doc => ({
+        _id: doc.id,
+        ...(doc.data()),
+    }));
+}
+
+export const getHottest = async () => {
+    const q = query(vehiclesRef, orderBy("likes", "desc"), limit(3));
     const snapshot = await getDocs(q);
 
     return snapshot.docs.map(doc => ({
