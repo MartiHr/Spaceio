@@ -15,6 +15,7 @@ import { Details } from './components/Details/Details';
 import { VehicleProvider } from './contexts/VehicleContext';
 import { Logout } from './components/Logout/Logout';
 import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
     const [blackBackground, setBlackBackground] = useState(false);
@@ -56,11 +57,13 @@ function App() {
                             <Route path='/' element={<Home />} />
                             <Route path='/login' element={<Login />} />
                             <Route path='/register' element={<Register />} />
-                            <Route path='/logout' element={<Logout />} />
-                            <Route path='/create' element={<Create />} />
                             <Route path='/catalog' element={<Catalog />} />
-                            <Route path='/edit/:vehicleId' element={<Edit />} />
                             <Route path='/details/:vehicleId' element={<Details />} />
+                            <Route element={<PrivateRoute />}>
+                                <Route path='/edit/:vehicleId' element={<Edit />} />
+                                <Route path='/create' element={<Create />} />
+                                <Route path='/logout' element={<Logout />} />
+                            </Route>
                             {/* <Route path="/*" element={<NotFound />}/> */}
                         </Routes>
                     </main>
