@@ -2,7 +2,7 @@
 Spaceio is a web application which stores data about space vehicles and presents them in an orderly manner. It was build by using REACT and FIRESTORE as base technologies.
 
 
-Installation guide is included in the README inside of the client folder of the application.
+Available scripts are included in the README inside of the client folder of the application.
 
 
 **_The base pages contain the following functionality:_**
