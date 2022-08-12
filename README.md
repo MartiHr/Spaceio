@@ -3,7 +3,6 @@ Spaceio is a web application which stores data about space vehicles and presents
 
 Installation guide is included in the README inside of the client folder of the application.
 
-```bash
 **_The base pages contain the following functionality:_**
 
 **Guest pages functionallity:**
@@ -30,4 +29,4 @@ Installation guide is included in the README inside of the client folder of the 
 -Delete - You are able to delete your own posts
 
 -Comment - You can comment under any vehicle post
-```
+
